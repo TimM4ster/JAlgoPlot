@@ -9,10 +9,11 @@ public class StateMachine {
 
     /*
     TODO:
-        - Add AlgoSummary
-            - public void writeSummary()
-            - public AlgoSummary getSummary()
-        - Progress in each state
+        - Summary of algorithm
+            - Total time elapsed
+            - Total number of iterations (through array)
+            - Total number of comparisons
+        - Progress for each state
         - Iterator
      */
 
