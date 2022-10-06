@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="" />
+    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="Initial commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +17,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2FlXujJe91UhWamBI2ehh3QHWeI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -37,9 +40,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1665067870837</updated>
-      <workItem from="1665067874330" duration="1000" />
+      <workItem from="1665067874330" duration="438000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1665067920612</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1665067920612</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -51,5 +65,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
 </project>
