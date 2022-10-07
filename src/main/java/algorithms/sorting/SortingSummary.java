@@ -1,5 +1,6 @@
 package algorithms.sorting;
 
+import algorithms.Algorithm;
 import algorithms.summary.AlgoSummary;
 
 /**
@@ -12,6 +13,11 @@ public class SortingSummary extends AlgoSummary {
      * The length of the array that was sorted.
      */
     private final int arrayLength;
+
+    /**
+     * The array before it was sorted.
+     */
+    private final int[] before;
 
     /**
      * The total number of comparisons performed by the sorting algorithm.
@@ -32,8 +38,9 @@ public class SortingSummary extends AlgoSummary {
     public SortingSummary(SortingAlgorithm algorithm) {
         super(algorithm);
         arrayLength = algorithm.array.length;
-        totalComparisons = algorithm.getTotalComparisons(); //TODO
-        totalSwaps = algorithm.getTotalSwaps(); //TODO
+        before = algorithm.before;
+        totalComparisons = algorithm.getTotalComparisons();
+        totalSwaps = algorithm.getTotalSwaps();
     }
 
     /**
@@ -71,10 +78,11 @@ public class SortingSummary extends AlgoSummary {
     @Override
     public String toString() {
         return String.format(
-                "Type of algorithm: %s, Name of algorithm: %s, Length of array: %d, Total time elapsed: %f, Total number of iterations: %d, Total number of comparisons: %d, Total number of swaps: %d",
+                "Type of algorithm: %s, Name of algorithm: %s, Length of array: %d, Level of sorting before: %f, Total time elapsed: %f, Total number of iterations: %d, Total number of comparisons: %d, Total number of swaps: %d",
                 type,
                 name,
                 arrayLength,
+                SortingAlgorithm.getUnsortednessOfArray(before),
                 totalTime,
                 totalIterations,
                 totalComparisons,

@@ -16,6 +16,11 @@ public abstract class SortingAlgorithm extends Algorithm {
     protected final int[] array;
 
     /**
+     * The array in the state before sorting.
+     */
+    protected final int[] before;
+
+    /**
      * The total number of comparisons performed by the sorting algorithm.
      */
     protected int totalComparisons = 0;
@@ -32,6 +37,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      */
     protected SortingAlgorithm(int[] array) {
         this.array = array;
+        before = getArrayCopy();
     }
 
     /**
@@ -76,7 +82,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * @return  The copy.
      */
     public int[] getArrayCopy() {
-        int[] copy = new int[array.length];
+        int[] copy = new int[this.array.length];
         System.arraycopy(array, 0, copy, 0, array.length);
         return copy;
     }
@@ -95,6 +101,24 @@ public abstract class SortingAlgorithm extends Algorithm {
      */
     public void printArray() {
         System.out.println(arrayToString());
+    }
+
+    /**
+     * Computes the level of unsortedness of an array. Since all arrays are constructed in a simple manner, a check for
+     * equality of index and element is enough.
+     *
+     * @param array The array.
+     * @return  The unsortedness.
+     */
+    public static double getUnsortednessOfArray(int[] array) {
+        int n = array.length;
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            if (array[i] == i + 1) {
+                sum++;
+            }
+        }
+        return (double) sum / n;
     }
 
     /**

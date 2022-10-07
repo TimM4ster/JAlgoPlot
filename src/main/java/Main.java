@@ -10,6 +10,9 @@ public class Main {
         for (int i = length; i > 0; i--) {
             array[length - i] = i;
         }
+        /*for (int i = 0; i < length; i++) {
+            array[i] = i + 1;
+        }*/
         testSortingAlgorithm(new BubbleSort(array));
     }
 
