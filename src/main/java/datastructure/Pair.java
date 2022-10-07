@@ -25,7 +25,7 @@ public class Pair<F, S> {
      * @param first The first element of this pair.
      * @param second    The second element of this pair.
      */
-    protected Pair(F first, S second) {
+    public Pair(F first, S second) {
         this.first = first;
         this.second = second;
     }

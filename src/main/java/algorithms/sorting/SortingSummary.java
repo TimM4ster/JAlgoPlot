@@ -9,6 +9,11 @@ import algorithms.summary.AlgoSummary;
 public class SortingSummary extends AlgoSummary {
 
     /**
+     * The length of the array that was sorted.
+     */
+    private final int arrayLength;
+
+    /**
      * The total number of comparisons performed by the sorting algorithm.
      */
     private final int totalComparisons;
@@ -26,8 +31,18 @@ public class SortingSummary extends AlgoSummary {
      */
     public SortingSummary(SortingAlgorithm algorithm) {
         super(algorithm);
+        arrayLength = algorithm.array.length;
         totalComparisons = algorithm.getTotalComparisons(); //TODO
         totalSwaps = algorithm.getTotalSwaps(); //TODO
+    }
+
+    /**
+     * Returns the length of the array that was sorted.
+     *
+     * @return  The length of the array.
+     */
+    public int getArrayLength() {
+        return arrayLength;
     }
 
     /**
@@ -46,5 +61,24 @@ public class SortingSummary extends AlgoSummary {
      */
     public int getTotalSwaps() {
         return totalSwaps;
+    }
+
+    /**
+     * Creates and returns a string-representation of this Summary.
+     *
+     * @return The string-representation.
+     */
+    @Override
+    public String toString() {
+        return String.format(
+                "Type of algorithm: %s, Name of algorithm: %s, Length of array: %d, Total time elapsed: %f, Total number of iterations: %d, Total number of comparisons: %d, Total number of swaps: %d",
+                type,
+                name,
+                arrayLength,
+                totalTime,
+                totalIterations,
+                totalComparisons,
+                totalSwaps
+        );
     }
 }

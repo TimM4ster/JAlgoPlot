@@ -12,7 +12,7 @@ public abstract class Algorithm {
     /**
      * The state machine of this algorithm. Can be used to plot the algorithm.
      */
-    protected StateMachine stateMachine;
+    protected final StateMachine stateMachine = new StateMachine();
 
     /**
      * The total time elapsed from the start of the algorithm until completion.
@@ -51,6 +51,7 @@ public abstract class Algorithm {
      * @return  The state machine.
      */
     public StateMachine getStateMachine() {
+        run();
         return stateMachine;
     }
 
@@ -75,5 +76,5 @@ public abstract class Algorithm {
     /**
      * Runs the algorithm and builds the state machine. Should always create a new instance of the state machine.
      */
-    public abstract void run();
+    protected abstract void run();
 }

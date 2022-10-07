@@ -9,10 +9,6 @@ public class StateMachine {
 
     /*
     TODO:
-        - Summary of algorithm
-            - Total time elapsed
-            - Total number of iterations (through array)
-            - Total number of comparisons
         - Progress for each state
      */
 
@@ -45,5 +41,14 @@ public class StateMachine {
         last.next = state;
         last = last.next;
         numberOfStates++;
+    }
+
+    /**
+     * Prints each state of this state machine to the console by calling the overwritten toString method.
+     */
+    public void print() {
+        for (State state = first; state != null; state = state.next) {
+            System.out.println(state);
+        }
     }
 }

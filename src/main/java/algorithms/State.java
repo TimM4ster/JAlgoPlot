@@ -72,4 +72,11 @@ public abstract class State {
     public int getIteration() {
         return iteration;
     }
+
+    /**
+     * Creates and returns a string-representation of this state.
+     *
+     * @return  The string-representation.
+     */
+    public abstract String toString();
 }

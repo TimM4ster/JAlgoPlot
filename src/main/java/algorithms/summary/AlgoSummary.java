@@ -7,27 +7,27 @@ import algorithms.Algorithm;
  * took until completion, the name and type of the algorithm and further information can be added through extending
  * classes.
  */
-public class AlgoSummary {
+public abstract class AlgoSummary {
 
     /**
      * The name of the algorithm.
      */
-    private final String name;
+    protected final String name;
 
     /**
      * The type of the algorithm (example: sorting).
      */
-    private final String type;
+    protected final String type;
 
     /**
      * The total time elapsed during the execution of the algorithm.
      */
-    private final double totalTime;
+    protected final double totalTime;
 
     /**
      * The total number of iterations the algorithm took for completion.
      */
-    private final int totalIterations;
+    protected final int totalIterations;
 
     /**
      * Constructor extracting the name and the type of the algorithm, the total time passed until completion of the
@@ -75,4 +75,18 @@ public class AlgoSummary {
     public int getTotalIterations() {
         return totalIterations;
     }
+
+    /**
+     * Prints this summary to the console.
+     */
+    public void print() {
+        System.out.println(toString());
+    }
+
+    /**
+     * Creates and returns a string-representation of this Summary.
+     *
+     * @return  The string-representation.
+     */
+    public abstract String toString();
 }
