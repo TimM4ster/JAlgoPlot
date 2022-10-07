@@ -1,7 +1,5 @@
 package algorithms.sorting;
 
-import algorithms.Algorithm;
-import algorithms.StateMachine;
 import algorithms.summary.AlgoSummary;
 
 /**
@@ -22,17 +20,14 @@ public class SortingSummary extends AlgoSummary {
 
     /**
      * Constructor extracting the name and the type of the algorithm, the total time passed until completion of the
-     * algorithm and the number of iterations the algorithm had to go through from the given state machine.
+     * algorithm and the number of iterations the algorithm had to go through from the given sorting algorithm object.
      *
      * @param algorithm The sorting algorithm.
-     * @param machine   The state machine of the algorithm.
-     *
-     *                  TODO: Change Algorithm to SortingAlgorithm
      */
-    public SortingSummary(Algorithm algorithm, StateMachine machine) {
-        super(algorithm, machine);
-        totalComparisons = 0; //TODO
-        totalSwaps = 0; //TODO
+    public SortingSummary(SortingAlgorithm algorithm) {
+        super(algorithm);
+        totalComparisons = algorithm.getTotalComparisons(); //TODO
+        totalSwaps = algorithm.getTotalSwaps(); //TODO
     }
 
     /**

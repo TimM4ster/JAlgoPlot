@@ -15,9 +15,14 @@ public abstract class Algorithm {
     protected StateMachine stateMachine;
 
     /**
-     * Runs the algorithm and builds the state machine. Should always create a new instance of the state machine.
+     * The total time elapsed from the start of the algorithm until completion.
      */
-    public abstract void run();
+    protected double totalTime;
+
+    /**
+     * The total number of iterations in the algorithm.
+     */
+    protected int totalIterations = 0;
 
     /**
      * Returns the name of this algorithm.
@@ -48,4 +53,27 @@ public abstract class Algorithm {
     public StateMachine getStateMachine() {
         return stateMachine;
     }
+
+    /**
+     * Returns the total time elapsed from the beginning of the algorithm until completion. Only call after method run.
+     *
+     * @return  The total time elapsed.
+     */
+    public double getTotalTime() {
+        return totalTime;
+    }
+
+    /**
+     * Returns the total number of iterations the algorithm needed until completion. Only call after method run.
+     *
+     * @return  The total number of iterations.
+     */
+    public int getTotalIterations() {
+        return totalIterations;
+    }
+
+    /**
+     * Runs the algorithm and builds the state machine. Should always create a new instance of the state machine.
+     */
+    public abstract void run();
 }

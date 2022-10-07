@@ -1,7 +1,6 @@
 package algorithms.summary;
 
 import algorithms.Algorithm;
-import algorithms.StateMachine;
 
 /**
  * An object of this class represents a summary of an algorithm. It contains information about the time the algorithm
@@ -32,15 +31,13 @@ public class AlgoSummary {
 
     /**
      * Constructor extracting the name and the type of the algorithm, the total time passed until completion of the
-     * algorithm and the number of iterations the algorithm had to go through from the given state machine.
-     *
-     * @param machine   The state machine of the algorithm.
+     * algorithm and the number of iterations the algorithm had to go through from the given algorithm object.
      */
-    public AlgoSummary(Algorithm algorithm, StateMachine machine) {
+    public AlgoSummary(Algorithm algorithm) {
         this.name = algorithm.getName();
         this.type = algorithm.getType();
-        this.totalTime = machine.last.getTime();
-        this.totalIterations = machine.last.getIteration();
+        this.totalTime = algorithm.getTotalTime();
+        this.totalIterations = algorithm.getTotalIterations();
     }
 
     /**

@@ -16,6 +16,16 @@ public abstract class SortingAlgorithm extends Algorithm {
     protected final int[] array;
 
     /**
+     * The total number of comparisons performed by the sorting algorithm.
+     */
+    protected int totalComparisons = 0;
+
+    /**
+     * The total number of swaps performed by the sorting algorithm.
+     */
+    protected int totalSwaps = 0;
+
+    /**
      * Constructor initializing the array that is to be sorted by the algorithm.
      *
      * @param array The array to be sorted.
@@ -31,6 +41,33 @@ public abstract class SortingAlgorithm extends Algorithm {
      */
     public int[] getArray() {
         return array;
+    }
+
+    /**
+     * Returns the total number of comparisons performed by the sorting algorithm. Only call after method run.
+     *
+     * @return  The total number of comparisons.
+     */
+    public int getTotalComparisons() {
+        return totalComparisons;
+    }
+
+    /**
+     * Returns the total number of swaps performed by the sorting algorithm. Only call after method run.
+     *
+     * @return  The total number of swaps.
+     */
+    public int getTotalSwaps() {
+        return totalSwaps;
+    }
+
+    /**
+     * Returns a sorting summary of the sorting algorithm.
+     *
+     * @return  The sorting summary.
+     */
+    public SortingSummary getSummary() {
+        return new SortingSummary(this);
     }
 
     /**
