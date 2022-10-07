@@ -14,7 +14,6 @@ public class StateMachine {
             - Total number of iterations (through array)
             - Total number of comparisons
         - Progress for each state
-        - Iterator
      */
 
     /**
