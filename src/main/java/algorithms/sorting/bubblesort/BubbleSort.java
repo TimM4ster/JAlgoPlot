@@ -1,7 +1,5 @@
 package algorithms.sorting.bubblesort;
 
-import algorithms.StateMachine;
-import algorithms.sorting.SortingAction;
 import algorithms.sorting.SortingAlgorithm;
 import algorithms.sorting.SortingState;
 import datastructure.Pair;
@@ -52,31 +50,31 @@ public class BubbleSort extends SortingAlgorithm {
         while(n > 1) {
             for (int i = 0; i < n - 1; i++) {
                 stateMachine.append(
-                        new SortingState(
+                        SortingState.comparison(
                                 id++,
                                 (double) (System.nanoTime() - startTime) / 1_000_000_000,
                                 iteration++,
-                                array,
+                                getArrayCopy(),
                                 new Pair<>(i, i + 1),
-                                new Pair<>(array[i], array[i + 1]),
-                                SortingAction.COMPARE
+                                new Pair<>(array[i], array[i + 1])
                         )
                 );
                 if (array[i] > array[i + 1]) {
-                    stateMachine.append(
-                            new SortingState(
-                                    id++,
-                                    (double) (System.nanoTime() - startTime) / 1_000_000_000,
-                                    iteration,
-                                    array,
-                                    new Pair<>(i, i + 1),
-                                    new Pair<>(array[i], array[i + 1]),
-                                    SortingAction.SWAP
-                            )
-                    );
+                    int[] before = getArrayCopy();
                     int tmp = array[i];
                     array[i] = array[i + 1];
                     array[i + 1] = tmp;
+                    stateMachine.append(
+                            SortingState.swap(
+                                    id++,
+                                    (double) (System.nanoTime() - startTime) / 1_000_000_000,
+                                    iteration,
+                                    before,
+                                    getArrayCopy(),
+                                    new Pair<>(i, i + 1),
+                                    new Pair<>(array[i + 1], array[i])
+                            )
+                    );
                     totalSwaps++;
                 }
                 totalComparisons++;

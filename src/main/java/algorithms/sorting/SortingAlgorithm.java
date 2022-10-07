@@ -35,7 +35,7 @@ public abstract class SortingAlgorithm extends Algorithm {
     }
 
     /**
-     * Returns the array that is to be sorted by the Bubble sort algorithm.
+     * Returns the array that is to be sorted by the sorting algorithm.
      *
      * @return  The array.
      */
@@ -68,6 +68,17 @@ public abstract class SortingAlgorithm extends Algorithm {
      */
     public SortingSummary getSummary() {
         return new SortingSummary(this);
+    }
+
+    /**
+     * Returns a copy of the current state of the array.
+     *
+     * @return  The copy.
+     */
+    public int[] getArrayCopy() {
+        int[] copy = new int[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length);
+        return copy;
     }
 
     /**
