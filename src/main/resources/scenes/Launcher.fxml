@@ -22,7 +22,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Button layoutX="125.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="Sorting">
+      <Button layoutX="125.0" layoutY="100.0" mnemonicParsing="false" onAction="#switchToSortingScene" prefHeight="50.0" prefWidth="250.0" text="Sorting">
          <font>
             <Font size="20.0" />
          </font>

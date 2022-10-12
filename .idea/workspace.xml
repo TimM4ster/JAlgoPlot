@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="Changed mainClassName in build.gradle">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/scenes/Launcher.fxml" afterDir="false" />
+    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="Finished first version of launcher">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/AlgoScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/panes/AlgoPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/panes/SortingPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/scenes/SortingScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Launcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/LauncherControls.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/LauncherControls.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scenes/MainScreen.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/scenes/Launcher.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scenes/Launcher.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/scenes/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scenes/Sorting.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +60,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="JavaFXApplication" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -79,18 +83,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/usr/java/javafx-sdk-19/lib",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.24712643",
-    "settings.editor.selected.configurable": "preferences.JavaFX"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/usr/java/javafx-sdk-19/lib&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.24712643&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/scenes" />
@@ -159,7 +163,8 @@
       <workItem from="1665216529959" duration="675000" />
       <workItem from="1665392573770" duration="5501000" />
       <workItem from="1665400491117" duration="337000" />
-      <workItem from="1665405558838" duration="4648000" />
+      <workItem from="1665405558838" duration="8561000" />
+      <workItem from="1665563859318" duration="17371000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1665067920612</created>
@@ -217,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665401265067</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Finished first version of launcher">
+      <created>1665424483538</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1665424483538</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +255,8 @@
     <MESSAGE value="adjusted TODO" />
     <MESSAGE value="Added javafx" />
     <MESSAGE value="Changed mainClassName in build.gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed mainClassName in build.gradle" />
+    <MESSAGE value="Finished first version of launcher" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished first version of launcher" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
