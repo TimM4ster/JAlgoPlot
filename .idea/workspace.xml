@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="Finished first version of launcher">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/AlgoScene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/panes/AlgoPane.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/panes/SortingPane.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/scenes/SortingScene.java" afterDir="false" />
+    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="A lot of changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/scenes/SortingScene_old.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/AlgoScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/AlgoScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/LauncherControls.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/LauncherControls.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scenes/Launcher.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scenes/Launcher.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scenes/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scenes/Sorting.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/panes/SortingPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/panes/SortingPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/scenes/SortingScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/scenes/SortingScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +162,8 @@
       <workItem from="1665392573770" duration="5501000" />
       <workItem from="1665400491117" duration="337000" />
       <workItem from="1665405558838" duration="8561000" />
-      <workItem from="1665563859318" duration="17371000" />
+      <workItem from="1665563859318" duration="17529000" />
+      <workItem from="1665653569107" duration="9381000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1665067920612</created>
@@ -229,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665424483538</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="A lot of changes">
+      <created>1665611680824</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1665611680824</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +262,8 @@
     <MESSAGE value="Added javafx" />
     <MESSAGE value="Changed mainClassName in build.gradle" />
     <MESSAGE value="Finished first version of launcher" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished first version of launcher" />
+    <MESSAGE value="A lot of changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="A lot of changes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -15,7 +15,27 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The entry point to the application. Layout of the components inside the launcher is taken from the <a href="/scenes/
+ * Launcher.fxml">Launcher.fxml</a> file.
+ *
+ * @since v0.9.0 (beta)
+ */
 public class Launcher extends Application {
+
+    /**
+     * The width of the launcher.
+     *
+     * @since v0.9.0 (beta)
+     */
+    public static final int WIDTH = 500;
+
+    /**
+     * The height of the launcher.
+     *
+     * @since v0.9.0 (beta)
+     */
+    public static final int HEIGHT = 450;
 
     public static void main(String[] args) {
         launch(args);
@@ -24,40 +44,15 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/scenes/Launcher.fxml")));
-        for (Node node :
-                root.getChildrenUnmodifiable()) {
-            System.out.println(node);
-        }
 
-        GridPane testPane = new GridPane();
-        Rectangle rec1 = new Rectangle();
-        rec1.setHeight(200);
-        rec1.setWidth(100);
-        Rectangle rec2 = new Rectangle();
-        rec2.setHeight(300);
-        rec2.setWidth(100);
-        GridPane.setValignment(rec1, VPos.BOTTOM);
-        testPane.add(rec1, 0, 0);
-        testPane.add(rec2, 1, 0);
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
 
-
-        Scene scene = new Scene(root, LauncherControls.WIDTH, LauncherControls.HEIGHT);
-
-        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->
-                //rec1.setHeight(stage.getHeight());
-                System.out.println("Height: " + stage.getHeight() + " Width: " + stage.getWidth());
-
-        stage.setTitle("Launcher");
+        stage.setTitle("JAlgoPlot");
         stage.setScene(scene);
-        //stage.setResizable(false);
-
-        stage.widthProperty().addListener(stageSizeListener);
-        stage.heightProperty().addListener(stageSizeListener);
 
         stage.show();
 
         stage.setMinWidth(stage.getWidth());
         stage.setMinHeight(stage.getHeight());
-
     }
 }
