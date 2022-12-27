@@ -50,14 +50,7 @@ public class Launcher extends Application {
         stage.setTitle("JAlgoPlot");
         stage.setScene(scene);
         stage.sizeToScene();
-
-        /*stage.showingProperty().addListener((observable, oldValue, showing) -> {
-            if(showing) {
-
-            }
-        });*/
-
-        stage.show();
         stage.setResizable(false);
+        stage.show();
     }
 }

@@ -36,7 +36,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * @param array The array to be sorted.
      */
     protected SortingAlgorithm(int[] array) {
-        this.array = array;
+        this.array = Arrays.copyOf(array, array.length);
         before = getArrayCopy();
     }
 

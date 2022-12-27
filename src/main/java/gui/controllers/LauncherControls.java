@@ -25,6 +25,7 @@ public class LauncherControls {
         SortingScene sortingScene = new SortingScene(stage);
         stage.setScene(sortingScene.getScene());
         stage.setTitle("JAlgoPlot - Sorting");
+        stage.setMaximized(true);
     }
 
     /**

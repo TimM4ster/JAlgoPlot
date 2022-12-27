@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="Added SortingScene.java">
+    <list default="true" id="17f41d72-bcc0-44ff-badc-062255eb9663" name="Changes" comment="Added Rectangles and functionalities of shuffling and reversing">
+      <change afterPath="$PROJECT_DIR$/ChatGPT_Code/DirectedEdge.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatGPT_Code/GraphExample.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatGPT_Code/MouseListener.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ChatGPT_Code/UndirectedEdge.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/GUI_Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/algorithms/StateMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/algorithms/StateMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/algorithms/sorting/SortingAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/algorithms/sorting/SortingAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/LauncherControls.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/LauncherControls.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/scenes/SortingScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/scenes/SortingScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +169,14 @@
       <workItem from="1665405558838" duration="8561000" />
       <workItem from="1665563859318" duration="17529000" />
       <workItem from="1665653569107" duration="16698000" />
-      <workItem from="1665772637387" duration="3501000" />
+      <workItem from="1665772637387" duration="3750000" />
+      <workItem from="1666361218720" duration="2780000" />
+      <workItem from="1666366543564" duration="155000" />
+      <workItem from="1666980458916" duration="657000" />
+      <workItem from="1671554908841" duration="3545000" />
+      <workItem from="1672059850794" duration="32000" />
+      <workItem from="1672060056035" duration="23913000" />
+      <workItem from="1672133574978" duration="3861000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1665067920612</created>
@@ -239,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665663512938</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added Rectangles and functionalities of shuffling and reversing">
+      <created>1665776383889</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1665776383889</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +291,8 @@
     <MESSAGE value="Finished first version of launcher" />
     <MESSAGE value="A lot of changes" />
     <MESSAGE value="Added SortingScene.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added SortingScene.java" />
+    <MESSAGE value="Added Rectangles and functionalities of shuffling and reversing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Rectangles and functionalities of shuffling and reversing" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,0 +1,58 @@
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.stage.Stage;
+
+public class GraphExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        // Create the nodes
+        Circle node1 = new Circle(50, 50, 20);
+        Circle node2 = new Circle(150, 50, 20);
+
+        // Create the edge
+        Line edge = new Line(70, 50, 130, 50);
+
+        // Set up event handlers to allow the nodes to be moved
+        node1.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                node1.setCenterX(event.getX());
+                node1.setCenterY(event.getY());
+                edge.setStartX(event.getX() + 20);
+                edge.setStartY(event.getY());
+            }
+        });
+        node2.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                node2.setCenterX(event.getX());
+                node2.setCenterY(event.getY());
+                edge.setEndX(event.getX() - 20);
+                edge.setEndY(event.getY());
+            }
+        });
+
+        // Create the group and add the nodes and edge
+        Group root = new Group();
+        root.getChildren().add(node1);
+        root.getChildren().add(node2);
+        root.getChildren().add(edge);
+
+        // Create the scene and add the group to it
+        Scene scene = new Scene(root, 200, 100);
+
+        // Set the stage properties and show the stage
+        primaryStage.setTitle("Graph Example");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
