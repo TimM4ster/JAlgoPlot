@@ -17,10 +17,14 @@
  */
 
 /**
- * Main class with main method. Mostly used for testing purposes.
+ * Main class with main method. Entry point to application.
+ *
+ * @author Tim-Michael Krieg
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Launcher.main(args);
     }
 }
