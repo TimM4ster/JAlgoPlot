@@ -1,3 +1,20 @@
+/**
+ *  JAlgoPlot - Made to make understanding algorithms easier.
+ *     Copyright (C) 2022-2023  Tim-Michael Krieg
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Affero General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Affero General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Affero General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 package gui;
 
 import javafx.embed.swing.SwingFXUtils;
@@ -11,9 +28,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This class contains all constants used in the GUI.
+ * This class contains all constants and reusable methods used in the graphical representations of the algorithms.
  *
- * @since v0.9.0 (beta)
+ * @author Tim-Michael Krieg
+ * @version 1.0.0
+ * @since v1.0.0
  */
 public class GUI_Utils {
 
@@ -23,7 +42,7 @@ public class GUI_Utils {
      * project.
      *
      * @param scene The scene to take a screenshot of.
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     public static void takeScreenshot(Scene scene) {
         WritableImage image = scene.snapshot(null);

@@ -1,46 +1,43 @@
+/**
+ *  JAlgoPlot - Made to make understanding algorithms easier.
+ *     Copyright (C) 2022-2023  Tim-Michael Krieg
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Affero General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Affero General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Affero General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 package gui.scenes;
 
-import algorithms.State;
-import algorithms.sorting.SortingAction;
-import algorithms.sorting.SortingAlgorithm;
-import algorithms.sorting.SortingState;
-import algorithms.sorting.bubblesort.BubbleSort;
-import datastructure.Pair;
 import gui.GUI_Utils;
-import gui.Launcher;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.embed.swing.SwingFXUtils;
 
-import javax.imageio.ImageIO;
-import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.Objects;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This class represents the scene of the sorting algorithms. It offers all methods that change the scene accordingly.
  * Further, action events triggered by the buttons of the sorting scene are processed here.
  *
- * @since v0.9.0 (beta)
+ * @author Tim-Michael Krieg
+ * @version 1.0.0
+ * @since v1.0.0
  */
 public class SortingScene {
 
@@ -49,39 +46,16 @@ public class SortingScene {
      */
 
     /**
-     * The length of the array that is displayed by the scene.
+     * List of all algorithms that can be displayed by the scene. The list is added to the combo box. It will be updated
+     * regularly to ensure that the combo box always contains the latest algorithms. In future versions, the list will
+     * be replaced by a file containing the algorithms.
      *
-     * @since v0.9.0 (beta)
-     */
-    private int array_length;
-
-    /**
-     * The array that is displayed in the middle of the scene and that is sorted by the chosen algorithm. It is
-     * initially set to null and can be initialized by entering a size into the text field and pressing the initialize
-     * button.
-     *
-     * @since v0.9.0 (beta)
-     */
-    private int[] array;
-
-    /**
-     * The algorithm that is selected in the combo box to sort the array of the scene.
-     *
-     * @since v0.9.0 (beta)
-     */
-    private SortingAlgorithm algorithm;
-
-    /**
-     * List of all algorithms that can be displayed by the scene. The list is added to the combo box.
-     *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private final String[] ALGORITHMS = {
             "Bubble Sort",
             "Soon more..."
     };
-
-    private final double PADDING = 10.0;
 
 
     /*
@@ -91,86 +65,88 @@ public class SortingScene {
     /**
      * The stage object that the scene is added to. Can be used to extract information about the size of the stage.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private final Stage STAGE;
 
     /**
      * The scene that this class creates.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private final Scene SCENE;
 
-    private Pane array_display;
-
     /**
-     * TODO
+     * The pane that contains the array which is displayed by the scene and on which the algorithm is executed.
+     *
+     * @since v1.0.0
      */
-    private Rectangle[] rectangles;
+    private ArrayPane array_pane;
+
 
     /**
      * The menu bar at the top of the scene.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private MenuBar menu_bar;
 
     /**
      * The combo box from which the algorithm can be chosen.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private ComboBox<String> combo_box;
 
     /**
      * The text field from which the array length is read.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private TextField text_field;
 
     /**
      * The button that starts the display of the algorithm.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private Button run_algo_button;
 
     /**
      * Button that initializes the array with the length set in the text field.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private Button init_array_button;
 
     /**
      * Button that shuffles the array displayed. Only active after array was initialized.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private Button shuffle_array_button;
 
     /**
      * Button that reverses the array displayed. Only active after array was initialized.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private Button rev_array_button;
 
     /**
      * Button that flips the alignment of the rectangles displayed in the scene. Only active after array was initialized.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private Button flip_align_button;
 
     /**
      * Constructor initializing the stage object that the scene is added to. It further initializes the actual scene
-     * with its components. The scene can then be accessed by the {@link #getScene() getScene}-method.
+     * with its components. The scene can then be accessed by the {@link #getScene() getScene}-method. In future
+     * versions, the scene will extend the Scene class from JavaFx.
      *
      * @param stage The stage this scene is set in.
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     public SortingScene(Stage stage) {
         stage.setTitle("Sorting Pane");  // Set title of the stage
@@ -183,19 +159,15 @@ public class SortingScene {
         box.getChildren().addAll(menu_bar, createMainPane());  // Add the menu bar and the main pane to the VBox
 
         SCENE = new Scene(box);  // Create the scene with the VBox as root node
-        SCENE.widthProperty().addListener(
-                (observable, oldValue, newValue) -> repaintRectangles()
-        );  // Add a listener to the width of the scene to repaint the rectangles when the width changes
-        SCENE.heightProperty().addListener(
-                (observable, oldValue, newValue) -> repaintRectangles()
-        );  // Add a listener to the height of the scene to repaint the rectangles when the height changes
+
+        array_pane.prefHeightProperty().bind(stage.heightProperty().subtract(100));
     }
 
     /**
-     * Returns the scene that is initialized in the constructor of this class.
+     * Returns the scene that is initialized in the constructor of this class. Will be removed in the future.
      *
      * @return  The stage.
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     public Scene getScene() {
         return SCENE;  // Return the scene
@@ -205,7 +177,7 @@ public class SortingScene {
      * Creates the main pane of the scene that all components are added to and returns it after creation.
      *
      * @return  The main pane of the scene.
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private BorderPane createMainPane() {
         BorderPane main_pane = new BorderPane();  // Create a new BorderPane to add all components to
@@ -213,10 +185,8 @@ public class SortingScene {
         HBox settings_box = createSettingsBox();  // Create the settings box
         main_pane.setTop(settings_box);  // Add the settings box to the top of the main pane
 
-        array_display = new Pane();  // Create a new pane to display the array
-        array_display.setPadding(new Insets(10, 10, 10, 10));  // Set padding of the pane
-        array_display.setPrefSize(settings_box.getWidth(), 400);// Create the array display
-        main_pane.setCenter(array_display);  // Add the array display to the center of the main pane
+        array_pane = new ArrayPane(this, settings_box.getWidth());
+        main_pane.setCenter(array_pane);
 
         return main_pane;  // Return the main pane
     }
@@ -227,7 +197,7 @@ public class SortingScene {
      *    <li>Home
      * </ul>
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private void createMenuBar() {
         menu_bar = new MenuBar();  // Create a new menu bar
@@ -248,7 +218,7 @@ public class SortingScene {
      * </ul>
      *
      * @return  The "Home" menu.
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private Menu createHomeMenu() {
         Menu home_menu = new Menu("Home");  // Create the "Home" menu
@@ -264,12 +234,9 @@ public class SortingScene {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Scene scene = new Scene(root, Launcher.WIDTH, Launcher.HEIGHT);
-                    STAGE.setTitle("JAlgoPlot");
-                    STAGE.setScene(scene);
+                    SCENE.setRoot(root);  // Set the root node of the scene to the root node of the FXML file
                     STAGE.sizeToScene();
-                    STAGE.setResizable(false);
-                    STAGE.show();
+                    STAGE.setTitle("JAlgoPlot");
                 }  // Set the action of the menu item to return to the main menu
         );
 
@@ -288,7 +255,7 @@ public class SortingScene {
      * Creates the upper portion of the scene. That is, it creates a horizontal box containing setting functionalities.
      *
      * @return  The HBox.
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private HBox createSettingsBox() {
         createRunButton();  // Create the run button
@@ -315,7 +282,7 @@ public class SortingScene {
                 init_array_button,
                 shuffle_array_button,
                 rev_array_button,
-                flip_align_button,
+                //flip_align_button,  TODO: Fix this
                 screenshot
         );  // Add all components to the HBox
         h_box.setStyle("-fx-background-color: #336699;");  // Set the background color of the HBox
@@ -327,7 +294,7 @@ public class SortingScene {
      * Creates the combo box that is used to select the algorithm for display. All available algorithms are stored in
      * the ALGORITHMS attribute. It is disabled by default until an array is initialized.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private void createComboBox() {
         combo_box = new ComboBox<>(FXCollections.observableArrayList(ALGORITHMS));
@@ -335,12 +302,8 @@ public class SortingScene {
         combo_box.setPromptText("Initialize Array");
         combo_box.setOnAction(
                 event -> {
-                    algorithm = switch (combo_box.getValue()) {
-                        case "Bubble Sort" -> new BubbleSort(array);
-                        default -> null;
-                        //TODO: Add more cases
-                    };
-                    run_algo_button.setDisable(algorithm == null);
+                    array_pane.setAlgorithm(combo_box.getValue());
+                    run_algo_button.setDisable(array_pane.getAlgorithm() == null);
                 }
         );
     }
@@ -355,14 +318,37 @@ public class SortingScene {
         run_algo_button = new Button("Run");
         run_algo_button.setDisable(true);
         run_algo_button.setOnAction(
-                event -> run_algorithm()
+                event -> {
+                    if (run_algo_button.getText().equals("Run")) {
+                        array_pane.startAlgorithm();
+                        disableButtons(true);
+                        run_algo_button.setText("Stop");
+                    } else {
+                        array_pane.stopAlgorithm();
+                        disableButtons(false);
+                        run_algo_button.setText("Run");
+                    }
+                }
         );
+    }
+
+    /**
+     * Disables or enables all buttons except the run button.
+     *
+     * @since v1.0.0
+     */
+    private void disableButtons(boolean disable) {
+        shuffle_array_button.setDisable(disable);
+        rev_array_button.setDisable(disable);
+        flip_align_button.setDisable(disable);
+        text_field.setDisable(disable);
+        combo_box.setDisable(disable);
     }
 
     /**
      * Creates the text field that is used to set the length of the displayed array. Only allows numerical values.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private void createArrayLengthReader() {
         text_field = new TextField();
@@ -372,7 +358,7 @@ public class SortingScene {
             init_array_button.setDisable(true);
             if (!newValue.equals("") && !newValue.matches("^[1-9]\\d*$")) {
                 text_field.setText(oldValue);
-            } else if (!newValue.equals("") && !newValue.equals(String.valueOf(array_length))) {
+            } else if (!newValue.equals("") && !newValue.equals(String.valueOf(array_pane.getArrayLength()))) {
                 init_array_button.setDisable(false);
             }
         });
@@ -381,15 +367,15 @@ public class SortingScene {
     /**
      * Creates the button that initializes the array with the length entered to the text field.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private void createInitializeArrayButton() {
         init_array_button = new Button("Initialize");
         init_array_button.setDisable(true);
         init_array_button.setOnAction(
                 event -> {
-                    initArrays();
-                    repaintRectangles();
+                    array_pane.initArrays(Integer.parseInt(text_field.getText()));
+
                     combo_box.setDisable(false);
                     combo_box.setPromptText("Select algorithm");
                     init_array_button.setDisable(true);
@@ -404,199 +390,50 @@ public class SortingScene {
     /**
      * Creates the button that shuffles the displayed array.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private void createShuffleButton() {
         shuffle_array_button = new Button("Shuffle");
         shuffle_array_button.setDisable(true);
         shuffle_array_button.setOnAction(
-                event -> {
-                    Random random = ThreadLocalRandom.current();
-                    for (int i = array_length - 1; i > 0; i--) {
-                        int index = random.nextInt(i + 1);
-                        // Simple swap
-                        int a = array[index];
-                        array[index] = array[i];
-                        array[i] = a;
-                    }
-                    repaintRectangles();
-                }
+                event -> array_pane.shuffleArray()
         );
     }
 
     /**
      * Creates the button that reverses the displayed array.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private void createReverseButton() {
         rev_array_button = new Button("Reverse");
         rev_array_button.setDisable(true);
         rev_array_button.setOnAction(
-                event -> {
-                    for (int i = 0; i < array_length / 2; i++) {
-                        int tmp = array[i];
-                        array[i] = array[array_length - 1 - i];
-                        array[array_length - 1 - i] = tmp;
-                    }
-                    repaintRectangles();
-                }
+                event -> array_pane.reverseArray()
         );
     }
 
     /**
      * Creates the button that flips the alignment of the displayed array.
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
     private void createFlipButton() {
         flip_align_button = new Button("Flip");
         flip_align_button.setDisable(true);
         flip_align_button.setOnAction(
-                event -> {
-                    for (int i = 0; i < array_length; i++) {
-                        rectangles[i].setY(
-                                rectangles[i].getY() == PADDING ?
-                                        array_display.getHeight() - PADDING - rectangles[i].getHeight() :
-                                        PADDING
-                        );
-                    }
-                }
+                event -> array_pane.flipRectangles()
         );
     }
 
     /**
-     * Creates the arrays. The array_length attribute is used to determine the length of the array. The array attribute
-     * is used to store the values of the array. The rectangles attribute is used to store the rectangles that are
-     * displayed.
+     * Called after the algorithm finished or was stopped. Enables all buttons and sets the run button text to "Run".
      *
-     * @since v0.9.0 (beta)
+     * @since v1.0.0
      */
-    private void initArrays() {
-        if (!array_display.getChildren().isEmpty()) {
-            array_display.getChildren().removeAll(rectangles);
-        }
-
-        array_length = Integer.parseInt(text_field.getText());
-        array = new int[array_length];
-        rectangles = new Rectangle[array_length];
-
-        for (int i = 0; i < array_length; i++) {
-            array[i] = i + 1;
-            rectangles[i] = new Rectangle();
-            rectangles[i].setStyle("-fx-fill: green");
-            array_display.getChildren().add(rectangles[i]);
-        }
+    public void resetAlgo() {
+        run_algo_button.setText("Run");
+        disableButtons(false);
     }
 
-    /**
-     * Repaints the rectangles that are displayed. The rectangles are painted green if they are not highlighted, red if
-     * they are highlighted and blue if they are being compared.
-     *
-     * @since v0.9.0 (beta)
-     */
-    private void repaintRectangles() {
-        for (int i = 0; i < array_length; i++) {
-            double v_stage_addon = 32;
-            double width = ((array_display.getWidth() - 2 * PADDING) - (array_length - 1)) / array_length;
-            double height = (SCENE.getHeight() - 2 * PADDING - v_stage_addon - array_display.getLayoutY()) * array[i] / array_length;
-
-            double x = PADDING + i * (width + 1);
-
-            rectangles[i].setWidth(width);
-            rectangles[i].setHeight(height);
-            rectangles[i].setX(x);
-            rectangles[i].setY(PADDING);
-        }
-    }
-
-    /**
-     * Highlights the rectangles that are displayed. The rectangles are painted green if they are not highlighted, red if
-     * they are highlighted and blue if they are being compared.
-     *
-     * @since v0.9.0 (beta)
-     */
-    private void highlightRectangles(int... indices) {
-        for (int index : indices) {
-            rectangles[index].setFill(Paint.valueOf("Yellow"));
-        }
-    }
-
-    private void highlightRectangles(Pair<Integer, Integer> indices) {
-        highlightRectangles(indices.first, indices.second);
-    }
-
-    private void resetRectangleColors(int... indices) {
-        for (int index : indices) {
-            rectangles[index].setFill(Paint.valueOf("Green"));
-        }
-    }
-
-    private void resetRectangleColors(Pair<Integer, Integer> indices) {
-        resetRectangleColors(indices.first, indices.second);
-    }
-
-    /**
-     * Runs the selected algorithm.
-     *
-     * @since v0.9.0 (beta)
-     */
-    private void run_algorithm() {
-        Iterator<State> iterator = algorithm.getStateMachine().iterator();
-        new Thread(() -> {
-            while (iterator.hasNext()) {
-                SortingState state = (SortingState) iterator.next();
-                Platform.runLater(() -> {
-                    //highlightRectangles(state.getIndices());
-                    if (state.getAction() == SortingAction.SWAP) {
-                        swapRectangles(state.getIndices());
-                    }
-                    //resetRectangleColors(state.getIndices());
-                });
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    public void swapRectangles(int index1, int index2) {
-        highlightRectangles(index1, index2);
-
-        double translation = rectangles[index2].getX() - rectangles[index1].getX();
-
-        TranslateTransition tt1 = new TranslateTransition(Duration.millis(500), rectangles[index1]);
-        tt1.setByX(translation);
-
-        TranslateTransition tt2 = new TranslateTransition(Duration.millis(500), rectangles[index2]);
-        tt2.setByX(-translation);
-
-        ParallelTransition pt = new ParallelTransition(tt1, tt2);
-        pt.setOnFinished(
-                event -> {
-                    rectangles[index1].setX(rectangles[index1].getX() + rectangles[index1].getTranslateX());
-                    rectangles[index1].setTranslateX(0);
-                    rectangles[index2].setX(rectangles[index2].getX() + rectangles[index2].getTranslateX());
-                    rectangles[index2].setTranslateX(0);
-
-                    Rectangle temp = rectangles[index1];
-                    rectangles[index1] = rectangles[index2];
-                    rectangles[index2] = temp;
-
-                    int tmp = array[index1];
-                    array[index1] = array[index2];
-                    array[index2] = tmp;
-
-                    resetRectangleColors(index1, index2);
-                }
-        );
-        pt.play();
-    }
-
-
-    private void swapRectangles(Pair<Integer, Integer> indices) {
-        swapRectangles(indices.first, indices.second);
-    }
 }
