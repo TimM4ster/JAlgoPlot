@@ -3,7 +3,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
-version '1.0.0'
+version file("version").readLines().first()
 
 repositories {
     mavenCentral()
