@@ -77,4 +77,21 @@ public class ArrayUtils {
         }
     }
 
+    /**
+     * Returns the largest element in the given array.
+     *
+     * @param array The array to search.
+     * @return The largest element in the given array.
+     * @since 1.1.0
+     */
+    public static int getLargestValue(int[] array) {
+        int largest = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > largest) {
+                largest = array[i];
+            }
+        }
+        return largest;
+    }
+
 }

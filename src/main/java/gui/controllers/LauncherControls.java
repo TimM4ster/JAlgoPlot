@@ -17,7 +17,7 @@
  */
 package gui.controllers;
 
-import gui.scenes.SortingScene;
+import gui.GUI_Utils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -41,9 +41,11 @@ public class LauncherControls {
      */
     public void switchToSortingScene(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        SortingScene sortingScene = new SortingScene(stage);
+        GUI_Utils.switchToSortingWindow(stage);
+        /*SortingScene_OLD sortingScene = new SortingScene_OLD(stage);
+        stage.setResizable(true);
         stage.setScene(sortingScene.getScene());
-        stage.setTitle("JAlgoPlot - Sorting");
+        stage.setTitle("JAlgoPlot - Sorting");*/
     }
 
     /**
