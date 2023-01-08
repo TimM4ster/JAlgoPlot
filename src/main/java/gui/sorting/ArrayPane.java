@@ -7,15 +7,18 @@ import algorithms.sorting.SortingState;
 import algorithms.sorting.bubblesort.BubbleSort;
 import datastructure.Pair;
 import gui.GUI_Utils;
-import gui.scenes.ArrayUtils;
 import javafx.animation.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -23,10 +26,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static gui.scenes.ArrayUtils.DEFAULT_COLOR;
-import static gui.scenes.ArrayUtils.SELECTED_COLOR;
+import static gui.sorting.ArrayUtils.DEFAULT_COLOR;
+import static gui.sorting.ArrayUtils.SELECTED_COLOR;
 
-public class ArrayDisplay extends Pane {
+public class ArrayPane extends Pane {
+
+    private final boolean movable = false;
 
     private int[] array;
 
@@ -54,7 +59,7 @@ public class ArrayDisplay extends Pane {
 
     private final BooleanProperty isFinishedProperty = new SimpleBooleanProperty(false);
 
-    public ArrayDisplay() {
+    public ArrayPane() {
         widthProperty().addListener((observable, oldValue, newValue) ->
                 paint()
         );
@@ -62,6 +67,8 @@ public class ArrayDisplay extends Pane {
         heightProperty().addListener((observable, oldValue, newValue) ->
                 paint()
         );
+
+        setStyle("-fx-border-color: gray; -fx-border-width: 1 0;");
     }
 
     public int getLength() {
@@ -112,30 +119,44 @@ public class ArrayDisplay extends Pane {
         for (int i = 0; i < length; i++) {
             rectangles[i] = new Rectangle();
             rectangles[i].setFill(DEFAULT_COLOR);
-
-            int finalI = i;
-
             rectangles[i].setOnMousePressed(
                     event -> {
-                        rectangles[finalI].setFill(SELECTED_COLOR);
-                        initialX = rectangles[finalI].getX();
-                        draggingOffset = event.getX() - initialX;
+
+                        if (event.getButton().equals(MouseButton.SECONDARY)) {
+                            ContextMenu contextMenu = new ContextMenu();
+                            MenuItem resizeItem = new MenuItem("Resize");
+                            contextMenu.getItems().add(resizeItem);
+                            contextMenu.show(this, event.getScreenX(), event.getScreenY());
+                        }
+
                     }
             );
-            rectangles[i].setOnMouseDragged(
-                    event -> {
-                        double newX = event.getX() - draggingOffset;
-                        rectangles[finalI].setX(newX);
-                        labels[finalI].setLayoutX(event.getX() - draggingOffset);
-                    }
-            );
-            rectangles[i].setOnMouseReleased(
-                    event -> {
-                        rectangles[finalI].setFill(DEFAULT_COLOR);
-                        rectangles[finalI].setX(getClosestX(rectangles[finalI].getX()));
-                        System.out.println("Drag released");
-                    }
-            );
+
+            if (movable) {
+                int finalI = i;
+
+                rectangles[i].setOnMousePressed(
+                        event -> {
+                            rectangles[finalI].setFill(SELECTED_COLOR);
+                            initialX = rectangles[finalI].getX();
+                            draggingOffset = event.getX() - initialX;
+                        }
+                );
+                rectangles[i].setOnMouseDragged(
+                        event -> {
+                            double newX = event.getX() - draggingOffset;
+                            rectangles[finalI].setX(newX);
+                            labels[finalI].setLayoutX(event.getX() - draggingOffset);
+                        }
+                );
+                rectangles[i].setOnMouseReleased(
+                        event -> {
+                            rectangles[finalI].setFill(DEFAULT_COLOR);
+                            rectangles[finalI].setX(getClosestX(rectangles[finalI].getX()));
+                            System.out.println("Drag released");
+                        }
+                );
+            }
         }
 
         getChildren().addAll(rectangles);
@@ -207,7 +228,12 @@ public class ArrayDisplay extends Pane {
 
     private void paintLabels() {
         for (int i = 0; i < length; i++) {
-            labels[i].setText(String.valueOf(array[i]));
+            if (rectangles[i].getWidth() > 31) {
+                labels[i].setVisible(true);
+                labels[i].setText(String.valueOf(array[i]));
+            } else {
+                labels[i].setVisible(false);
+            }
         }
     }
 

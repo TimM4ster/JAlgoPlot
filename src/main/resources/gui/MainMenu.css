@@ -1,0 +1,6 @@
+.button {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Arial";
+    -fx-background-radius: 10px;
+}

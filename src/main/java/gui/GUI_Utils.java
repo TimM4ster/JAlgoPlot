@@ -17,7 +17,6 @@
  */
 package gui;
 
-import gui.sorting.SortingDisplay;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -51,56 +50,6 @@ public class GUI_Utils {
 
     public final static Duration DEFAULT_ANIMATION_DURATION = Duration.millis(500);
 
-    /**
-     * Takes the given stage and switches the scene to the main menu. If the stage was previously resizable, it will be
-     * made non-resizable. Further, if the stage was maximized, it will be restored to the main menu's size.
-     *
-     * @param stage The stage to switch the scene of.
-     * @since v1.1.0
-     */
-    public static void switchToMainMenu(Stage stage) {
-        Parent root;
-        try {
-            root = FXMLLoader.load(
-                    Objects.requireNonNull(GUI_Utils.class.getResource("/scenes/Launcher.fxml"))
-            );  // Load the FXML file for the main menu
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-        if (stage.isResizable()) {
-            stage.setResizable(false);
-        }
-        if (stage.isMaximized()) {
-            stage.setMaximized(false);
-        }
-        stage.getScene().setRoot(root);
-        stage.sizeToScene();
-        stage.setTitle("JAlgoPlot");
-        stage.show();
-    }
-
-    /**
-     * Takes the given stage and switches to the scene depicting sorting algorithms. If the stage was previously
-     * non-resizable, it will be made resizable.
-     *
-     * @param stage The stage to switch the scene of.
-     * @since v1.1.0
-     */
-    public static void switchToSortingWindow(Stage stage) {
-        SortingDisplay sortingDisplay = new SortingDisplay(stage);
-        stage.getScene().setRoot(sortingDisplay);
-
-        // TODO: stage.setHeight and stage.setWidth
-        stage.setHeight(800);
-        stage.setWidth(1300);
-
-        if (!stage.isResizable()) {
-            stage.setResizable(true);
-        }
-
-        stage.setTitle("JAlgoPlot - Sorting");
-        stage.show();
-    }
 
     /**
      * This method takes a screenshot of the current scene and saves it to the file system. The file name contains the

@@ -15,7 +15,7 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package gui.scenes;
+package gui.sorting;
 
 import javafx.scene.paint.Color;
 
@@ -24,7 +24,7 @@ import javafx.scene.paint.Color;
  * contains the colors used for the array.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  */
 public class ArrayUtils {

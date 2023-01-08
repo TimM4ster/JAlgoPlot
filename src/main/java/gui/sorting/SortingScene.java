@@ -1,11 +1,14 @@
 package gui.sorting;
 
 import gui.GUI_Utils;
+import gui.SceneSwitcher;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -16,7 +19,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class SortingDisplay extends VBox {
+public class SortingScene extends Scene {
+
+    private final VBox root;
+
+    private final double width = 1300.0;
+
+    private final double height = 800.0;
 
     private final Stage stage;
 
@@ -38,7 +47,7 @@ public class SortingDisplay extends VBox {
      *
      * @since v1.1.0
      */
-    private final ArrayDisplay arrayDisplay = new ArrayDisplay();
+    private final ArrayPane arrayPane = new ArrayPane();
 
     /**
      * The panel containing the controls of the algorithm. The controls include the buttons to start, pause and stop the
@@ -56,7 +65,7 @@ public class SortingDisplay extends VBox {
      *
      * @since v1.1.0
      */
-    private final Pane algoInfo = new Pane();
+    private final BorderPane algoInfo = new BorderPane();
 
     private final ComboBox<String> algoSelection = new ComboBox<>(getAlgorithms());;
 
@@ -84,7 +93,10 @@ public class SortingDisplay extends VBox {
 
     private final ProgressBar progressBar = new ProgressBar();
 
-    public SortingDisplay(Stage stage) {
+    public SortingScene(Stage stage) {
+        super(new VBox());
+        root = (VBox) getRoot();
+        root.setPrefSize(width, height);
         this.stage = stage;
 
         initMenuBar();
@@ -107,7 +119,7 @@ public class SortingDisplay extends VBox {
         Menu homeMenu = new Menu("Home");
 
         MenuItem mainMenu = new MenuItem("Main Menu");
-        mainMenu.setOnAction(event -> GUI_Utils.switchToMainMenu(stage));
+        mainMenu.setOnAction(event -> SceneSwitcher.switchToMainMenu(stage));
 
         MenuItem exitMenu = new MenuItem("Exit");
         exitMenu.setOnAction(event -> Platform.exit());
@@ -127,7 +139,7 @@ public class SortingDisplay extends VBox {
         );
 
         menuBar.getMenus().addAll(homeMenu, settingsMenu);
-        getChildren().add(menuBar);
+        root.getChildren().add(menuBar);
     }
 
     /**
@@ -146,8 +158,8 @@ public class SortingDisplay extends VBox {
         algoSelection.setDisable(true);
         algoSelection.setPromptText("Initialize Array");
         algoSelection.setOnAction(event -> {
-            arrayDisplay.setAlgorithm(algoSelection.getValue());
-            boolean disable = arrayDisplay.getAlgorithm() == null;
+            arrayPane.setAlgorithm(algoSelection.getValue());
+            boolean disable = arrayPane.getAlgorithm() == null;
             runButton.setDisable(disable);
             speedField.setDisable(disable);
             increaseSpeed.setDisable(disable);
@@ -167,12 +179,12 @@ public class SortingDisplay extends VBox {
 
                 runButton.setText("Pause");
 
-                arrayDisplay.startAlgorithm();
+                arrayPane.startAlgorithm();
             } else if (runButton.getText().equals("Pause")) {
-                arrayDisplay.pauseAlgorithm();
+                arrayPane.pauseAlgorithm();
                 runButton.setText("Play");
             } else {
-                arrayDisplay.resumeAlgorithm();
+                arrayPane.resumeAlgorithm();
                 runButton.setText("Pause");
             }
         });
@@ -180,7 +192,7 @@ public class SortingDisplay extends VBox {
         stopButton.setDisable(true);
         stopButton.setOnAction(
                 event -> {
-                    arrayDisplay.stopAlgorithm();
+                    arrayPane.stopAlgorithm();
 
                     resetAfterAlgoFinished();
                 }
@@ -192,7 +204,7 @@ public class SortingDisplay extends VBox {
             initButton.setDisable(true);
             if (!newValue.equals("") && !newValue.matches("^[1-9]\\d*$")) {
                 arraySize.setText(oldValue);
-            } else if (!newValue.equals("") && !newValue.equals(String.valueOf(arrayDisplay.getLength()))) {
+            } else if (!newValue.equals("") && !newValue.equals(String.valueOf(arrayPane.getLength()))) {
                 initButton.setDisable(false);
             }
         });
@@ -201,7 +213,7 @@ public class SortingDisplay extends VBox {
         initButton.setOnAction(
                 event -> {
                     int size = Integer.parseInt(arraySize.getText());
-                    arrayDisplay.init(size);
+                    arrayPane.init(size);
                     algoSelection.setDisable(false);
                     algoSelection.setPromptText("Select Algorithm");
                     shuffleButton.setDisable(false);
@@ -213,22 +225,23 @@ public class SortingDisplay extends VBox {
 
         shuffleButton.setDisable(true);
         shuffleButton.setOnAction(
-                event -> arrayDisplay.shuffle()
+                event -> arrayPane.shuffle()
         );
 
         reverseButton.setDisable(true);
         reverseButton.setOnAction(
-                event -> arrayDisplay.reverse()
+                event -> arrayPane.reverse()
         );
 
         flipButton.setDisable(true);
         flipButton.setOnAction(
-                event -> arrayDisplay.flip()
+                event -> arrayPane.flip()
         );
 
         speedField.setDisable(true);
         speedField.setFocusTraversable(false);
-        arrayDisplay.algoAnimation.rateProperty().bind(
+        speedField.setPrefWidth(50);
+        arrayPane.algoAnimation.rateProperty().bind(
                 Bindings.createDoubleBinding(
                         () -> Double.parseDouble(speedField.getText()),
                         speedField.textProperty()
@@ -275,23 +288,23 @@ public class SortingDisplay extends VBox {
                 screenshotButton
         );
 
-        getChildren().add(controls);
+        root.getChildren().add(controls);
     }
 
     private void initAlgoInfo() {
+        progressBar.progressProperty().bind(arrayPane.progressProperty());
+
+        progressBar.prefWidthProperty().bind(stage.widthProperty().subtract(2 * GUI_Utils.DEFAULT_SPACING));
+
         algoInfo.setPadding(GUI_Utils.DEFAULT_INSETS);
 
-        progressBar.progressProperty().bind(arrayDisplay.progressProperty());
+        algoInfo.setTop(progressBar);
 
-        progressBar.prefWidthProperty().bind(stage.widthProperty());
-
-        algoInfo.getChildren().add(progressBar);
-
-        getChildren().add(algoInfo);
+        root.getChildren().add(algoInfo);
     }
 
     /**
-     * Initializes the panel containing the array display. The array display is an {@link ArrayDisplay} object. The
+     * Initializes the panel containing the array display. The array display is an {@link ArrayPane} object. The
      * size of the panel is determined by the size of the other components in the sorting display. The width is kept
      * consistent with the width of the stage, while the height is determined by the height of the stage minus the
      * height of the menu bar, the controls and the algorithm information.
@@ -299,9 +312,9 @@ public class SortingDisplay extends VBox {
      * @since v1.1.0
      */
     private void initArrayDisplay() {
-        arrayDisplay.prefWidthProperty().bind(stage.widthProperty());
+        arrayPane.prefWidthProperty().bind(stage.widthProperty());
 
-        arrayDisplay.prefHeightProperty().bind(
+        arrayPane.prefHeightProperty().bind(
                 stage.heightProperty().subtract(
                         menuBar.heightProperty().add(
                                 controls.heightProperty().add(
@@ -311,7 +324,7 @@ public class SortingDisplay extends VBox {
                 )
         );
 
-        arrayDisplay.isFinishedProperty().addListener(
+        arrayPane.isFinishedProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue) {
                         resetAfterAlgoFinished();
@@ -319,7 +332,7 @@ public class SortingDisplay extends VBox {
                 }
         );
 
-        getChildren().add(arrayDisplay);
+        root.getChildren().add(arrayPane);
     }
 
     /**

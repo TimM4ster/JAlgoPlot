@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Added the ability to pause and resume the display of the algorithm
 - Added the ability to resize (essentially reset) the array, even if no new length was set
 - Added a progress bar at the bottom of the sorting display, in order to show the progress of the sorting process
+- Added text fields showing the current value of the rectangles and making them editable
 
 ### Fixes
 
