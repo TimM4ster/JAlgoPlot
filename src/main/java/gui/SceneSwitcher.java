@@ -1,6 +1,7 @@
 package gui;
 
 import gui.MainMenuScene;
+import gui.graph.GraphScene;
 import gui.sorting.SortingScene;
 import javafx.stage.Stage;
 
@@ -14,6 +15,11 @@ public class SceneSwitcher {
     public static void switchToSortingDisplay(Stage stage) {
         stage.setScene(new SortingScene(stage));
         stage.setTitle("JAlgoPlot - Sorting");
+    }
+
+    public static void switchToGraphDisplay(Stage stage) {
+        stage.setScene(new GraphScene(stage));
+        stage.setTitle("JAlgoPlot - Graph");
     }
 
 }

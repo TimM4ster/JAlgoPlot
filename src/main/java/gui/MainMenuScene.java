@@ -24,6 +24,8 @@ public class MainMenuScene extends Scene {
 
     private final Button switchToSortingSceneButton = new Button("Sorting");
 
+    private final Button switchToGraphSceneButton = new Button("Graph");
+
     private final Button soon = new Button("Soon");
 
     private final Button wikiButton = new Button("Wiki");
@@ -56,6 +58,10 @@ public class MainMenuScene extends Scene {
         switchToSortingSceneButton.setOnAction(e -> {
             SceneSwitcher.switchToSortingDisplay(stage);
         });
+        switchToGraphSceneButton.setPrefSize(250, 50);
+        switchToGraphSceneButton.setOnAction(e -> {
+            SceneSwitcher.switchToGraphDisplay(stage);
+        });
         soon.setPrefSize(250, 50);
         soon.setDisable(true);
         wikiButton.setPrefSize(250, 50);
@@ -68,6 +74,7 @@ public class MainMenuScene extends Scene {
         });
         buttonBox.getChildren().addAll(
                 switchToSortingSceneButton,
+                switchToGraphSceneButton,
                 soon,
                 wikiButton,
                 aboutButton,
