@@ -2,65 +2,50 @@ package gui.graph;
 
 import java.util.ArrayList;
 
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class Graph {
     
-    private ArrayList<Circle> nodes = new ArrayList<Circle>();
+    private ArrayList<Vertex<String>> nodes = new ArrayList<>();
 
-    private ArrayList<Line> edges = new ArrayList<Line>();
+    private ArrayList<DirectedEdge<String>> edges = new ArrayList<>();
 
-    private double draggingOffset = 0;
-    private double initialX = 0;
     public Graph(int size) {
         for (int i = 0; i < size; i++) {
-            nodes.add(new Circle());
+            nodes.add(new Vertex<String>(
+                String.valueOf(i)
+            ));
         }
 
-        for (Circle node : nodes) {
-            node.setRadius(10);
-            node.setCenterX(Math.random() * 500);
-            node.setCenterY(Math.random() * 500);
-            node.setOnMousePressed(
-                e -> {
-                    initialX = node.getCenterX();
-                    draggingOffset = e.getSceneX() - node.getCenterX();
-                }
-            );
-
-            node.setOnMouseDragged(
-                e -> {
-                    node.setCenterX(e.getSceneX() - draggingOffset);
-                    node.setCenterY(e.getSceneY() - draggingOffset);
-                }
-            );
-
-            node.setOnMouseReleased(
-                e -> {
-                    if (Math.abs(initialX - node.getCenterX()) < 5) {
-                        node.setCenterX(initialX);
-                    }
-                }
-            );
-        }
-
-        for (int i = 0; i < size; i++) {
+        /* for (int i = 0; i < size; i++) {
             for (int j = i + 1; j < size; j++) {
                 addEdge(nodes.get(i), nodes.get(j));
             }
-        }
+        } */
+
+        addDirectedEdge(nodes.get(0), nodes.get(1));
     }
 
-    public ArrayList<Circle> getNodes() {
+    public ArrayList<Vertex<String>> getNodes() {
         return nodes;
     }
 
-    public ArrayList<Line> getEdges() {
+    public ArrayList<DirectedEdge<String>> getEdges() {
         return edges;
     }
 
-    private void addEdge(Circle node1, Circle node2) {
+    private void addDirectedEdge(Vertex<String> node1, Vertex<String> node2) {
+        edges.add(
+            new DirectedEdge<String>(
+                "Test",
+                node1,
+                node2,
+                true
+            )
+        );
+    }
+
+    private void addEdge(Vertex<String> node1, Vertex<String> node2) {
         Line edge = new Line();
 
         edge.startXProperty().bind(node1.centerXProperty());
@@ -68,8 +53,14 @@ public class Graph {
         edge.endXProperty().bind(node2.centerXProperty());
         edge.endYProperty().bind(node2.centerYProperty());
 
-        edge.setMouseTransparent(true);
+        edge.setOnMousePressed(
+            e -> {
+                edge.setStroke(javafx.scene.paint.Color.RED);
+            }
+        );
 
-        edges.add(edge);
+        //edge.setMouseTransparent(true);
+
+        //edges.add(edge);
     }
 }

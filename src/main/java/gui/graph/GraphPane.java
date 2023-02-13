@@ -12,7 +12,7 @@ public class GraphPane extends Pane {
     private void paint() {
         getChildren().clear();
         Graph graph = new Graph(16);
-        getChildren().addAll(graph.getNodes());
         getChildren().addAll(graph.getEdges());
+        getChildren().addAll(graph.getNodes());
     }
 }
