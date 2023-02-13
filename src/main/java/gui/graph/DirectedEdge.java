@@ -67,6 +67,9 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
 
         updater.invalidated(null);
 
+        arrow1.strokeProperty().bind(edge.strokeProperty());
+        arrow2.strokeProperty().bind(edge.strokeProperty());
+
         getChildren().addAll(arrow1, arrow2);
     }
 }
