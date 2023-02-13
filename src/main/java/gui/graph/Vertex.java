@@ -30,11 +30,15 @@ public class Vertex<V extends Object> extends StackPane {
     private double draggingOffsetY = 0;
 
     public Vertex(V value) {
+        this(value, Math.random() * 500, Math.random() * 500);
+    }
+
+    public Vertex(V value, double x, double y) {
         super();
         this.value = value;
 
-        setLayoutX(Math.random() * 500);
-        setLayoutY(Math.random() * 500);
+        setLayoutX(x - defaultRadius);
+        setLayoutY(y - defaultRadius);
 
         initMouseBehaviour();
         initNode();

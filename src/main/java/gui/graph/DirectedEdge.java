@@ -7,30 +7,30 @@ import javafx.scene.shape.Line;
 
 public class DirectedEdge<E extends Object> extends Edge<E> {
 
-    public DirectedEdge(E value, Vertex<?> from, Vertex<?> to, boolean bidirectional) {
+    public DirectedEdge(E value, Vertex<?> from, Vertex<?> to) {
         super(value, from, to);
-        //TODO Auto-generated constructor stub
-        if (bidirectional) {
-            Arrow arrow1 = new Arrow();
-            arrow1.setStartX(edge.getEndX());
-            arrow1.setStartY(edge.getEndY());
-            arrow1.setEndX(edge.getStartX());
-            arrow1.setEndY(edge.getStartY());
-            arrow1.setMouseTransparent(true);
-            getChildren().add(arrow1);
-        }
+        Arrow arrow = new Arrow();
+
+        arrow.startXProperty().bind(edge.endXProperty());
+        arrow.startYProperty().bind(edge.endYProperty());
+
+        arrow.endXProperty().bind(edge.startXProperty());
+        arrow.endYProperty().bind(edge.startYProperty());
+        
+        arrow.setMouseTransparent(true);
+        getChildren().add(arrow);
     }
     
 
     private class Arrow extends Group {
         private final Line line;
-
-        public Arrow() {
-            this(new Line(), new Line(), new Line());
-        }
     
         private static final double arrowLength = 20;
-        private static final double arrowWidth = 7;
+        private static final double arrowWidth = 15;
+
+        private Arrow() {
+            this(new Line(), new Line(), new Line());
+        }
     
         private Arrow(Line line, Line arrow1, Line arrow2) {
             super(line, arrow1, arrow2);
@@ -55,6 +55,7 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
                 } else {
                     double factor = arrowLength / Math.hypot(sx-ex, sy-ey);
                     double factorO = arrowWidth / Math.hypot(sx-ex, sy-ey);
+                    System.out.println("factor: " + factor + " factorO: " + factorO);
     
                     // part in direction of main line
                     double dx = (sx - ex) * factor;
@@ -81,10 +82,6 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
     
         // start/end properties
     
-        public final void setStartX(double value) {
-            line.setStartX(value);
-        }
-    
         public final double getStartX() {
             return line.getStartX();
         }
@@ -92,11 +89,7 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
         public final DoubleProperty startXProperty() {
             return line.startXProperty();
         }
-    
-        public final void setStartY(double value) {
-            line.setStartY(value);
-        }
-    
+        
         public final double getStartY() {
             return line.getStartY();
         }
@@ -104,11 +97,7 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
         public final DoubleProperty startYProperty() {
             return line.startYProperty();
         }
-    
-        public final void setEndX(double value) {
-            line.setEndX(value);
-        }
-    
+        
         public final double getEndX() {
             return line.getEndX();
         }
@@ -116,11 +105,7 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
         public final DoubleProperty endXProperty() {
             return line.endXProperty();
         }
-    
-        public final void setEndY(double value) {
-            line.setEndY(value);
-        }
-    
+        
         public final double getEndY() {
             return line.getEndY();
         }
