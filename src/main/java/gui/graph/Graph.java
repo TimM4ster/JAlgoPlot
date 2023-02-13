@@ -33,4 +33,14 @@ public class Graph<V, E> {
             )
         );
     }
+
+    public void addDirectedEdge(E value, Vertex<V> node1, Vertex<V> node2) {
+        edges.add(
+            new DirectedEdge<E>(
+                value,
+                node1,
+                node2
+            )
+        );
+    }
 }

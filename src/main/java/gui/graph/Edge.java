@@ -13,23 +13,23 @@ public class Edge<E extends Object> extends Group {
 
     private final Label label = new Label();
 
+    protected Circle point = new Circle();
+
+    protected final Vertex<?> from;
+
+    protected final Vertex<?> to;
+
     public Edge(E value, Vertex<?> from, Vertex<?> to) {
         this.value = value;
+        this.from = from;
+        this.to = to;
         label.setText(value.toString());
 
         edge.startXProperty().bind(from.centerXProperty());
         edge.startYProperty().bind(from.centerYProperty());
         edge.endXProperty().bind(to.centerXProperty());
         edge.endYProperty().bind(to.centerYProperty());
-
-        Circle point = new Circle();
-        point.setRadius(3);
-        point.setFill(javafx.scene.paint.Color.RED);
-
-        // Set the point to the position at which the edge intersects the circle
-        point.centerXProperty().bind(edge.endXProperty().subtract(15));
-        point.centerYProperty().bind(edge.endYProperty().subtract(15));
-
+    
         edge.setOnMousePressed(
             e -> {
                 edge.setStroke(javafx.scene.paint.Color.RED);

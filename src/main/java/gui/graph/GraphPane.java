@@ -16,7 +16,7 @@ public class GraphPane extends Pane {
             graph.addNode(i);
         }
 
-        graph.addEdge(1, graph.getNodes().get(0), graph.getNodes().get(1));
+        graph.addDirectedEdge(1, graph.getNodes().get(0), graph.getNodes().get(1));
 
         setOnMousePressed(
             e -> {
