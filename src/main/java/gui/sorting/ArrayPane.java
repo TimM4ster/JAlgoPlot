@@ -131,6 +131,9 @@ public class ArrayPane extends Pane {
                     }
             );
 
+            rectangles[i].setArcWidth(10);
+            rectangles[i].setArcHeight(10);
+
             if (movable) {
                 int finalI = i;
 

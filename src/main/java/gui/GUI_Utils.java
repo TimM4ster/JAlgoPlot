@@ -70,6 +70,9 @@ public class GUI_Utils {
 
         // Use the timestamp to create the filename
         String filename = "screenshot-" + timestamp + ".png";
+        if (!new File("screenshots").exists()) {
+            new File("screenshots").mkdir();
+        }
         File file = new File("screenshots", filename);
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);

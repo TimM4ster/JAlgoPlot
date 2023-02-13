@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -88,7 +89,7 @@ public class SortingScene extends Scene {
 
     private final Button decreaseSpeed = new Button("-");
 
-    private final Button screenshotButton = new Button("Screenshot");
+    private final Button screenshotButton = new Button("Screenshot (F2)");
 
     private final ProgressBar progressBar = new ProgressBar();
 
@@ -105,6 +106,14 @@ public class SortingScene extends Scene {
         initArrayDisplay();
 
         initAlgoInfo();
+
+        this.setOnKeyPressed(
+                event -> {
+                    if (event.getCode().equals(KeyCode.F2)) {
+                        GUI_Utils.takeScreenshot(this);
+                    }
+                }
+        );
     }
 
     /**
@@ -132,6 +141,7 @@ public class SortingScene extends Scene {
         Menu settingsMenu = new Menu("Settings");
 
         MenuItem colorSettings = new MenuItem("Color Settings");
+        colorSettings.setOnAction(event -> SceneSwitcher.openColorSettings());
 
         settingsMenu.getItems().addAll(
                 colorSettings
