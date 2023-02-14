@@ -1,5 +1,6 @@
 package gui.graph;
 
+import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
@@ -7,6 +8,10 @@ import javafx.scene.layout.Pane;
 public class GraphPane extends Pane {
 
     private final Graph<Integer, Integer> graph = new Graph<>();
+
+    public boolean dragging = false;
+
+    private Point2D draggingOrigin;
 
     public GraphPane() {
         widthProperty().addListener(e -> paint());
@@ -31,6 +36,27 @@ public class GraphPane extends Pane {
                     );
                     contextMenu.getItems().add(addVertexItem);
                     contextMenu.show(this, e.getScreenX(), e.getScreenY());
+                }
+
+                if (e.isPrimaryButtonDown() && dragging) {
+                    draggingOrigin = new Point2D(e.getX(), e.getY());
+                }
+            }
+        );
+
+        setOnMouseDragged(
+            e -> {
+                if (dragging) {
+                    Point2D current = new Point2D(e.getX(), e.getY());
+                    Point2D delta = draggingOrigin.subtract(current);
+                    
+                    // Move all nodes
+                    for (Vertex<?> vertex : graph.getNodes()) {
+                        vertex.setLayoutX(vertex.getLayoutX() - delta.getX());
+                        vertex.setLayoutY(vertex.getLayoutY() - delta.getY());
+                    }
+
+                    draggingOrigin = current;
                 }
             }
         );
