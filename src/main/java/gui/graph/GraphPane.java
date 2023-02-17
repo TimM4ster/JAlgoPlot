@@ -1,70 +1,21 @@
 package gui.graph;
 
-import javafx.geometry.Point2D;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Pane;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 
-public class GraphPane extends Pane {
+public class GraphPane extends HBox {
+    
+    private final GraphVisualizerPane graphVisualizerPane = new GraphVisualizerPane();
 
-    private final Graph<Integer, Integer> graph = new Graph<>();
+    private final GraphModifierPane graphModifierPane = new GraphModifierPane();
 
-    public boolean dragging = false;
+    public GraphPane(Scene scene) {
+        super();
+        setPrefSize(700, 500);
 
-    private Point2D draggingOrigin;
+        graphVisualizerPane.prefWidthProperty().bind(scene.widthProperty().subtract(graphModifierPane.getMinWidth()));
 
-    public GraphPane() {
-        widthProperty().addListener(e -> paint());
-        heightProperty().addListener(e -> paint());
-
-        for (int i = 0; i < 10; i++) {
-            graph.addNode(i);
-        }
-
-        graph.addDirectedEdge(1, graph.getNodes().get(0), graph.getNodes().get(1));
-
-        setOnMousePressed(
-            e -> {
-                if (e.isSecondaryButtonDown()) {
-                    ContextMenu contextMenu = new ContextMenu();
-                    MenuItem addVertexItem = new MenuItem("Add Vertex");
-                    addVertexItem.setOnAction(
-                        event -> {
-                            graph.addNode(0, e.getX(), e.getY());
-                            paint();
-                        }
-                    );
-                    contextMenu.getItems().add(addVertexItem);
-                    contextMenu.show(this, e.getScreenX(), e.getScreenY());
-                }
-
-                if (e.isPrimaryButtonDown() && dragging) {
-                    draggingOrigin = new Point2D(e.getX(), e.getY());
-                }
-            }
-        );
-
-        setOnMouseDragged(
-            e -> {
-                if (dragging) {
-                    Point2D current = new Point2D(e.getX(), e.getY());
-                    Point2D delta = draggingOrigin.subtract(current);
-                    
-                    // Move all nodes
-                    for (Vertex<?> vertex : graph.getNodes()) {
-                        vertex.setLayoutX(vertex.getLayoutX() - delta.getX());
-                        vertex.setLayoutY(vertex.getLayoutY() - delta.getY());
-                    }
-
-                    draggingOrigin = current;
-                }
-            }
-        );
+        getChildren().addAll(graphVisualizerPane, graphModifierPane);
     }
 
-    private void paint() {
-        getChildren().clear();
-        getChildren().addAll(graph.getEdges());
-        getChildren().addAll(graph.getNodes());
-    }
 }

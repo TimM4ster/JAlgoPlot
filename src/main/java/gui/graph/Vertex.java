@@ -1,6 +1,8 @@
 package gui.graph;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -23,8 +25,9 @@ public class Vertex<V extends Object> extends StackPane {
 
     private final int defaultRadius = 15;
 
-    private double initialX = 0;
-    private double initialY = 0;
+    private double zoomFactor = 1;
+
+    private BooleanProperty isDraggingProperty = new SimpleBooleanProperty();
 
     private double draggingOffsetX = 0;
     private double draggingOffsetY = 0;
@@ -63,34 +66,32 @@ public class Vertex<V extends Object> extends StackPane {
     }
 
     private void initMouseBehaviour() {
-        setOnMousePressed(
+        node.setOnMousePressed(
             e -> {
-                initialX = getLayoutX();
-                initialY = getLayoutY();
-                draggingOffsetX = e.getSceneX() - getLayoutX();
-                draggingOffsetY = e.getSceneY() - getLayoutY();
+                isDraggingProperty.set(true);
+                draggingOffsetX = e.getSceneX() / zoomFactor - getLayoutX();
+                draggingOffsetY = e.getSceneY() / zoomFactor - getLayoutY();
+                toFront();
             }
         );
 
-        setOnMouseDragged(
+
+        node.setOnMouseDragged(
             e -> {
-                setLayoutX(e.getSceneX() - draggingOffsetX);
-                setLayoutY(e.getSceneY() - draggingOffsetY);
+                double x = (e.getSceneX() / zoomFactor - draggingOffsetX);
+                double y = (e.getSceneY() / zoomFactor - draggingOffsetY);
+                setLayoutX(x);
+                setLayoutY(y);
             }
         );
 
-        setOnMouseReleased(
+        node.setOnMouseReleased(
             e -> {
                 //TODO: snap to edge if out of bounds
 
                 //TODO: Add a listener to the scene width and height
 
-                if (Math.abs(initialX - getLayoutX()) < 5) {
-                    setLayoutX(initialX);
-                }
-                if (Math.abs(initialY - getLayoutY()) < 5) {
-                    setLayoutY(initialY);
-                }
+                isDraggingProperty.set(false);
             }
         );
     }
@@ -117,6 +118,14 @@ public class Vertex<V extends Object> extends StackPane {
 
     public DoubleProperty centerYProperty() {
         return centerYProperty;
+    }
+
+    public BooleanProperty isDraggingProperty() {
+        return isDraggingProperty;
+    }
+
+    public void setZoomFactor(double zoomFactor) {
+        this.zoomFactor = zoomFactor;
     }
 
 }
