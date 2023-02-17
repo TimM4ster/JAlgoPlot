@@ -7,21 +7,18 @@ import javafx.scene.layout.Pane;
 
 public class GraphVisualizerPane extends Pane {
 
-    private final Graph<Integer, Integer> graph = new Graph<>();
+    private final Graph<Integer, Integer> graph;
 
     private boolean onVertex = false;
 
     private Point2D draggingOrigin;
 
-    public GraphVisualizerPane() {
+    public GraphVisualizerPane(Graph<Integer, Integer> graph) {
+        this.graph = graph;
         setPrefSize(500, 500);
 
         //widthProperty().addListener(e -> paint());
         //heightProperty().addListener(e -> paint());
-
-        for (int i = 0; i < 10; i++) {
-            graph.addNode(i);
-        }
 
         paint();
 
