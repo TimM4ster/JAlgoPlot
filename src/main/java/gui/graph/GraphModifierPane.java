@@ -24,6 +24,10 @@ public class GraphModifierPane extends VBox {
     private final Button addVertexButton = new Button("Add Vertex");
 
     private final Button addEdgeButton = new Button("Add Edge");
+
+    private final Button testRunButton = new Button("Test Run");
+
+    private final Button testShuffleButton = new Button("Test Shuffle");
     
     public GraphModifierPane(GraphPane graphPane, Graph<Integer, Integer> graph) {
         super();
@@ -34,7 +38,7 @@ public class GraphModifierPane extends VBox {
 
         numberOfEdgesLabel = new Label("Number of Edges: " + graph.numberOfEdgesProperty().get());
 
-        numberOfEdgesTooltip = new Tooltip("Undirected: " + graph.getNumberOfUndirectedEdges() + "\nDirected: " + graph.getNumberOfDirectedEdges());
+        numberOfEdgesTooltip = new Tooltip("Undirected: " + graph.getNumberUndirectedEdges() + "\nDirected: " + graph.getNumberDirectedEdges());
         
         setMinWidth(200);
         setBackground(
@@ -57,18 +61,35 @@ public class GraphModifierPane extends VBox {
             (observable, oldValue, newValue) -> {
                 numberOfEdgesLabel.setText("Number of Edges: " + newValue);
                 numberOfEdgesTooltip.setText(
-                    "Undirected: " + graph.getNumberOfUndirectedEdges() + "\nDirected: " + graph.getNumberOfDirectedEdges()
+                    "Undirected: " + graph.getNumberUndirectedEdges() + "\nDirected: " + graph.getNumberDirectedEdges()
                 );
             }
         );
 
         numberOfEdgesLabel.setTooltip(numberOfEdgesTooltip);
 
+        testRunButton.setOnAction(
+            event -> {
+                FruchtermanReingold fr = new FruchtermanReingold(graph, graphPane.getWidth() - 200, graphPane.getHeight(), 1.0);
+
+                fr.run(20);
+            }
+        );
+
+        testShuffleButton.setOnAction(
+            event -> {
+                graph.randomizeVertexPositions();
+            }
+        );
+
+
         getChildren().addAll(
             numberOfVerticesLabel,
             numberOfEdgesLabel,
             addVertexButton,
-            addEdgeButton
+            addEdgeButton,
+            testRunButton,
+            testShuffleButton
         );
     }
 

@@ -11,19 +11,15 @@ public class GraphVisualizerPane extends Pane {
 
     private boolean onVertex = false;
 
+    private Vertex<Integer> selectedVertex;
+
     private Point2D draggingOrigin;
 
     public GraphVisualizerPane(Graph<Integer, Integer> graph) {
         this.graph = graph;
         setPrefSize(500, 500);
 
-        //widthProperty().addListener(e -> paint());
-        //heightProperty().addListener(e -> paint());
-
         paint();
-
-        /* graph.addDirectedEdge(1, graph.getNodes().get(0), graph.getNodes().get(1));
-        graph.addDirectedEdge(3, graph.getNodes().get(0), graph.getNodes().get(2)); */
 
         setOnMousePressed(
             e -> {
@@ -37,9 +33,20 @@ public class GraphVisualizerPane extends Pane {
                         }
                     );
                     contextMenu.getItems().add(addVertexItem);
-                    contextMenu.show(this, e.getScreenX(), e.getScreenY());
-                }
 
+                    if (onVertex) {
+                        MenuItem setValItem = new MenuItem("Set Value");
+                        setValItem.setOnAction(
+                            event -> {
+                                new ChangeValueStage<Integer>(selectedVertex);
+                            }
+                        );
+                        contextMenu.getItems().add(setValItem);
+                    }
+                    
+                    contextMenu.show(this.getScene().getWindow(), e.getScreenX(), e.getScreenY());
+                }
+                
                 if (e.isPrimaryButtonDown() && !onVertex) {
                     draggingOrigin = new Point2D(e.getX(), e.getY());
                 }
@@ -53,9 +60,10 @@ public class GraphVisualizerPane extends Pane {
                     Point2D delta = draggingOrigin.subtract(current);
                     
                     // Move all nodes
-                    for (Vertex<?> vertex : graph.getNodes()) {
-                        vertex.setLayoutX(vertex.getLayoutX() - delta.getX());
-                        vertex.setLayoutY(vertex.getLayoutY() - delta.getY());
+                    for (Vertex<?> vertex : graph.getVertices()) {
+                        vertex.setPosition(
+                            vertex.getPosition().subtract(delta)
+                        );
                     }
 
                     draggingOrigin = current;
@@ -69,7 +77,7 @@ public class GraphVisualizerPane extends Pane {
                     double scale = e.getDeltaY() > 0 ? 1.1 : 1 / 1.1;
                     setScaleX(getScaleX() * scale);
                     setScaleY(getScaleY() * scale);
-                    for (Vertex<?> vertex : graph.getNodes()) {
+                    for (Vertex<?> vertex : graph.getVertices()) {
                         vertex.setZoomFactor(getScaleX());
                     }
                     e.consume();
@@ -81,20 +89,17 @@ public class GraphVisualizerPane extends Pane {
     private void paint() {
         getChildren().clear();
 
-        for (Vertex<Integer> vertex : graph.getNodes()) {
+        for (Vertex<Integer> vertex : graph.getVertices()) {
             vertex.isDraggingProperty().addListener(
                 e -> {
-                    if (vertex.isDraggingProperty().get()) {
-                        onVertex = true;
-                    } else {
-                        onVertex = false;
-                    }
+                    onVertex = vertex.isDraggingProperty().get();
+                    selectedVertex = vertex;
                 }
             );
         }
 
         getChildren().addAll(graph.getEdges());
-        getChildren().addAll(graph.getNodes());
+        getChildren().addAll(graph.getVertices());
     }
 
     public Graph<Integer, Integer> getGraph() {

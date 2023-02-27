@@ -24,8 +24,8 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
 
             double distanceRatio = (distance - from.getRadius()) / distance;
             
-            double ex = from.centerXProperty().doubleValue() + (distanceRatio * directionX);
-            double ey = from.centerYProperty().doubleValue() + (distanceRatio * directionY);
+            double ex = from.positionProperty().get().getX() + (distanceRatio * directionX);
+            double ey = from.positionProperty().get().getY() + (distanceRatio * directionY);
 
             double sx = edge.getStartX();
             double sy = edge.getStartY();
@@ -69,6 +69,9 @@ public class DirectedEdge<E extends Object> extends Edge<E> {
 
         arrow1.strokeProperty().bind(edge.strokeProperty());
         arrow2.strokeProperty().bind(edge.strokeProperty());
+
+        arrow1.strokeWidthProperty().bind(edge.strokeWidthProperty());
+        arrow2.strokeWidthProperty().bind(edge.strokeWidthProperty());
 
         getChildren().addAll(arrow1, arrow2);
     }

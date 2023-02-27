@@ -6,7 +6,8 @@ import javafx.scene.layout.HBox;
 public class GraphPane extends HBox {
 
     //private final Graph<Integer, Integer> graph = Graph.getEmptyIntegerGraph();
-    private final Graph<Integer, Integer> graph = Graph.getRandomIntegerGraph(40, 20);
+    private final Graph<Integer, Integer> graph = GraphGenerator.getRandomIntegerGraph(2, 1);
+    //private final Graph<Integer, Integer> graph = Graph.getFullyConnectedIntegerGraph(60);
 
     private final GraphModifierPane graphModifierPane = new GraphModifierPane(this, graph);
     

@@ -1,11 +1,18 @@
 package gui.graph;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Light.Point;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -41,23 +48,13 @@ public class Vertex<V extends Object> extends StackPane {
      */
     private final Label label = new Label();
 
-    /**
-     * The current position of the center of the vertex.
-     */
-    private final Point2D center;
+    ObjectProperty<Point2D> positionProperty;
 
-    private final DoubleProperty centerXProperty = new SimpleDoubleProperty();
+    private static final Paint DEFAULT_FILL = Paint.valueOf("white");
 
-    private final DoubleProperty centerYProperty = new SimpleDoubleProperty();
+    private static final int DEFAULT_RADIUS = 15;
 
-    /**
-     * The current layout position of the vertex (that is, the center minus the radius of the circle).
-     */
-    private final Point2D layoutPosition;
-
-    private final Paint defaultFill = Paint.valueOf("white");
-
-    private final int defaultRadius = 15;
+    private final IntegerProperty radiusProperty = new SimpleIntegerProperty(DEFAULT_RADIUS);
 
     private double zoomFactor = 1;
 
@@ -68,9 +65,6 @@ public class Vertex<V extends Object> extends StackPane {
      */
     private Point2D disposition = new Point2D(0, 0);
 
-    private double draggingOffsetX = 0;
-    private double draggingOffsetY = 0;
-
     public Vertex(V value) {
         this(value, Math.random() * 500, Math.random() * 500);
     }
@@ -78,12 +72,20 @@ public class Vertex<V extends Object> extends StackPane {
     public Vertex(V value, double x, double y) {
         super();
         this.value = value;
+        positionProperty = new SimpleObjectProperty<>(new Point2D(x, y));
 
-        center = new Point2D(x, y);
-        layoutPosition = new Point2D(x - defaultRadius, y - defaultRadius);
+        DoubleBinding layoutXBinding = Bindings.createDoubleBinding(
+            () -> positionProperty.get().getX() - radiusProperty.get(),
+            positionProperty
+        );
 
-        setLayoutX(layoutPosition.getX());
-        setLayoutY(layoutPosition.getY());
+        DoubleBinding layoutYBinding = Bindings.createDoubleBinding(
+            () -> positionProperty.get().getY() - radiusProperty.get(),
+            positionProperty
+        );
+
+        layoutXProperty().bind(layoutXBinding);
+        layoutYProperty().bind(layoutYBinding);
 
         initMouseBehaviour();
         initNode();
@@ -93,13 +95,10 @@ public class Vertex<V extends Object> extends StackPane {
     }
 
     private void initNode() {
-        node.setRadius(defaultRadius);
-        node.setFill(defaultFill);
+        node.radiusProperty().bind(radiusProperty);
+        node.setFill(DEFAULT_FILL);
         node.setStroke(Paint.valueOf("black"));
-        node.setStrokeWidth(1);
-
-        centerXProperty.bind(layoutXProperty().add(node.radiusProperty()));
-        centerYProperty.bind(layoutYProperty().add(node.radiusProperty()));
+        node.setStrokeWidth(2);
     }
 
     private void initLabel() {
@@ -111,8 +110,10 @@ public class Vertex<V extends Object> extends StackPane {
         node.setOnMousePressed(
             e -> {
                 isDraggingProperty.set(true);
-                draggingOffsetX = e.getSceneX() / zoomFactor - getLayoutX();
-                draggingOffsetY = e.getSceneY() / zoomFactor - getLayoutY();
+                disposition = new Point2D(
+                    e.getSceneX() / zoomFactor - getPosition().getX(), 
+                    e.getSceneY() / zoomFactor - getPosition().getY()
+                );
                 toFront();
             }
         );
@@ -120,19 +121,17 @@ public class Vertex<V extends Object> extends StackPane {
 
         node.setOnMouseDragged(
             e -> {
-                double x = (e.getSceneX() / zoomFactor - draggingOffsetX);
-                double y = (e.getSceneY() / zoomFactor - draggingOffsetY);
-                setLayoutX(x);
-                setLayoutY(y);
+                setPosition(
+                    new Point2D(
+                        e.getSceneX() / zoomFactor, 
+                        e.getSceneY() / zoomFactor
+                    ).subtract(disposition)
+                );
             }
         );
 
         node.setOnMouseReleased(
             e -> {
-                //TODO: snap to edge if out of bounds
-
-                //TODO: Add a listener to the scene width and height
-
                 isDraggingProperty.set(false);
             }
         );
@@ -148,22 +147,39 @@ public class Vertex<V extends Object> extends StackPane {
 
     public void setValue(V value) {
         this.value = value;
+        label.setText(value.toString());
     }
 
-    public int getRadius() {
-        return defaultRadius;
+    public Point2D getPosition() {
+        return positionProperty.get();
     }
 
-    public DoubleProperty centerXProperty() {
-        return centerXProperty;
+    public void setPosition(Point2D position) {
+        positionProperty.set(position);
     }
 
-    public DoubleProperty centerYProperty() {
-        return centerYProperty;
+    public ObjectProperty<Point2D> positionProperty() {
+        return positionProperty;
     }
 
+    public Point2D getDisposition() {
+        return disposition;
+    }  
+    
     public void setDisposition(Point2D disposition) {
         this.disposition = disposition;
+    }
+
+    public void resetDisposition() {
+        setDisposition(new Point2D(0, 0));
+    }    
+
+    public int getRadius() {
+        return radiusProperty.get();
+    }
+
+    public void setRadius(int radius) {
+        radiusProperty.set(radius);
     }
 
     public BooleanProperty isDraggingProperty() {

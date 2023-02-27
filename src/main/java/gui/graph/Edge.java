@@ -1,9 +1,9 @@
 package gui.graph;
 
 import javafx.scene.Group;
-import javafx.scene.control.Label;
-import javafx.scene.shape.Circle;
+import javafx.scene.control.Tooltip;
 import javafx.scene.shape.Line;
+import javafx.util.Duration;
 
 public class Edge<E extends Object> extends Group {
     
@@ -11,24 +11,25 @@ public class Edge<E extends Object> extends Group {
 
     protected final Line edge = new Line();
 
-    private final Label label = new Label();
+    private final Tooltip tooltip = new Tooltip();
 
-    protected Circle point = new Circle();
+    protected Vertex<?> from;
 
-    protected final Vertex<?> from;
-
-    protected final Vertex<?> to;
+    protected Vertex<?> to;
 
     public Edge(E value, Vertex<?> from, Vertex<?> to) {
         this.value = value;
         this.from = from;
         this.to = to;
-        label.setText(value.toString());
+        tooltip.setText("Weight: " + value.toString());
 
-        edge.startXProperty().bind(from.centerXProperty());
-        edge.startYProperty().bind(from.centerYProperty());
-        edge.endXProperty().bind(to.centerXProperty());
-        edge.endYProperty().bind(to.centerYProperty());
+        tooltip.setShowDelay(Duration.seconds(0));
+        Tooltip.install(edge, tooltip);
+
+        setFrom(from);
+        setTo(to);
+
+        edge.setStrokeWidth(2);
     
         edge.setOnMousePressed(
             e -> {
@@ -36,7 +37,7 @@ public class Edge<E extends Object> extends Group {
             }
         );
 
-        getChildren().addAll(edge, point);
+        getChildren().addAll(edge);
     }
 
     public E getValue() {
@@ -49,6 +50,36 @@ public class Edge<E extends Object> extends Group {
 
     public Line getEdge() {
         return edge;
+    }
+
+    public Vertex<?> getFrom() {
+        return from;
+    }
+
+    public void setFrom(Vertex<?> from) {
+        this.from = from;
+        edge.startXProperty().bind(
+            from.layoutXProperty().add(from.getRadius())
+        );
+
+        edge.startYProperty().bind(
+            from.layoutYProperty().add(from.getRadius())
+        );
+    }
+
+    public Vertex<?> getTo() {
+        return to;
+    }
+
+    public void setTo(Vertex<?> to) {
+        this.to = to;
+        edge.endXProperty().bind(
+            to.layoutXProperty().add(to.getRadius())
+        );
+
+        edge.endYProperty().bind(
+            to.layoutYProperty().add(to.getRadius())
+        );
     }
 
 }
