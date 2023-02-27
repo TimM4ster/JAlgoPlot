@@ -17,7 +17,7 @@
  */
 
 import gui.MainMenuScene;
-import gui.sorting.SortingScene;
+import gui.newsorting.SortingScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -50,7 +50,8 @@ public class Launcher extends Application {
     public void start(Stage stage) {
         stage.setTitle("JAlgoPlot");  // Set the title of the stage.
         //stage.setScene(new MainMenuScene(stage));  // Set the scene of the stage.
-        stage.setScene(new SortingScene(stage));
+        //stage.setScene(new SortingScene(stage)); // TAKE THIS
+        stage.setScene(new SortingScene(stage));  // Set the scene of the stage.
         stage.show();  // Show the stage.
     }
 }
