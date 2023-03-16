@@ -10,7 +10,7 @@ public class SortingScene extends Scene {
 
     private final Stage stage;
 
-    private final ArrayPane arrayPane = new ArrayPane(this);
+    private final ArrayVisualizerPane arrayPane = new ArrayVisualizerPane(this);
     
     public SortingScene(Stage stage) {
         super(new VBox());
