@@ -24,7 +24,7 @@ import javafx.scene.paint.Color;
  * contains the colors used for the array.
  *
  * @author Tim-Michael Krieg
- * @version 1.1.0
+ * @version {@value Launcher#VERSION}
  * @since 1.0.0
  */
 public class ArrayUtils {

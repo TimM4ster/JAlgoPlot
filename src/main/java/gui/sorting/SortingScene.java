@@ -32,7 +32,7 @@ public class SortingScene extends Scene {
      * The menu bar at the top of the sorting display. Adds the ability to return to the main menu, exit the application
      * and access the settings.
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private final MenuBar menuBar = new MenuBar();
 
@@ -44,7 +44,7 @@ public class SortingScene extends Scene {
      * The position of the pane is set to be in between the controls of the algorithm and the panel containing
      * information about the algorithm. When the stage is resized, the pane will be resized as well.
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private final ArrayPane arrayPane = new ArrayPane();
 
@@ -53,7 +53,7 @@ public class SortingScene extends Scene {
      * algorithm, a drop-down menu to select the algorithm and the ability to control the speed of the display. Further,
      * in order to initialize the displayed array, the panel contains a text field to enter the size of the array.
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private final HBox controls = new HBox();
 
@@ -62,7 +62,7 @@ public class SortingScene extends Scene {
      * complexity of the algorithm and information about the current state of execution. That includes a progress bar,
      * indicating the progress of the algorithm, and a label, indicating the current step of the algorithm.
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private final BorderPane algoInfo = new BorderPane();
 
@@ -111,7 +111,7 @@ public class SortingScene extends Scene {
      * Initializes the menu bar at the top of the sorting display. Adds the ability to return to the main menu, exit the
      * application and access the settings.
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private void initMenuBar() {
         menuBar.prefWidthProperty().bind(stage.widthProperty());
@@ -147,7 +147,7 @@ public class SortingScene extends Scene {
      * display. Further, in order to initialize the displayed array, the panel contains a text field to enter the size
      * of the array.
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private void initControls() {
         controls.setPadding(GUI_Utils.DEFAULT_INSETS);
@@ -308,7 +308,7 @@ public class SortingScene extends Scene {
      * consistent with the width of the stage, while the height is determined by the height of the stage minus the
      * height of the menu bar, the controls and the algorithm information.
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private void initArrayDisplay() {
         arrayPane.prefWidthProperty().bind(stage.widthProperty());
@@ -338,7 +338,7 @@ public class SortingScene extends Scene {
      * Resets the controls after the algorithm has finished. That includes, enabling the buttons to shuffle, reverse and
      * flip the array, disabling the stop button and changing the run button to "Start".
      *
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private void resetAfterAlgoFinished() {
         stopButton.setDisable(true);
@@ -357,7 +357,7 @@ public class SortingScene extends Scene {
      * {@link ObservableList}, so that it can be used in a {@link ComboBox}.
      *
      * @return The list of sorting algorithms.
-     * @since v1.1.0
+     * @since v0.2.0
      */
     private ObservableList<String> getAlgorithms() {
         List<String> algorithms = new ArrayList<>();

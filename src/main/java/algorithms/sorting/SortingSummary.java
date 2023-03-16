@@ -25,36 +25,36 @@ import algorithms.summary.AlgoSummary;
  * sorting scene. Will be extended and used in the future.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class SortingSummary extends AlgoSummary {
 
     /**
      * The length of the array that was sorted.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final int arrayLength;
 
     /**
      * The array before it was sorted.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final int[] before;
 
     /**
      * The total number of comparisons performed by the sorting algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final int totalComparisons;
 
     /**
      * The total number of swaps performed by the sorting algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final int totalSwaps;
 
@@ -63,7 +63,7 @@ public class SortingSummary extends AlgoSummary {
      * algorithm and the number of iterations the algorithm had to go through from the given sorting algorithm object.
      *
      * @param algorithm The sorting algorithm.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public SortingSummary(SortingAlgorithm algorithm) {
         super(algorithm);
@@ -77,7 +77,7 @@ public class SortingSummary extends AlgoSummary {
      * Returns the length of the array that was sorted.
      *
      * @return  The length of the array.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getArrayLength() {
         return arrayLength;
@@ -87,7 +87,7 @@ public class SortingSummary extends AlgoSummary {
      * Returns the total number of comparisons performed by the sorting algorithm.
      *
      * @return  The total number of comparisons.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getTotalComparisons() {
         return totalComparisons;
@@ -97,7 +97,7 @@ public class SortingSummary extends AlgoSummary {
      * Returns the total number of swaps performed by the sorting algorithm.
      *
      * @return  The total number of swaps.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getTotalSwaps() {
         return totalSwaps;
@@ -107,7 +107,7 @@ public class SortingSummary extends AlgoSummary {
      * Creates and returns a string-representation of this Summary.
      *
      * @return The string-representation.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     @Override
     public String toString() {

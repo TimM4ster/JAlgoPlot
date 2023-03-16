@@ -26,36 +26,36 @@ import java.util.Arrays;
  * sorting algorithm should implement this class for key functionalities.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public abstract class SortingAlgorithm extends Algorithm {
 
     /**
      * The array that is to be sorted by the sorting algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected int[] array;
 
     /**
      * The array in the state before sorting.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected int[] before;
 
     /**
      * The total number of comparisons performed by the sorting algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected int totalComparisons = 0;
 
     /**
      * The total number of swaps performed by the sorting algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected int totalSwaps = 0;
 
@@ -63,7 +63,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Constructor initializing the array that is to be sorted by the algorithm.
      *
      * @param array The array to be sorted.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected SortingAlgorithm(int[] array) {
         this.array = Arrays.copyOf(array, array.length);
@@ -74,7 +74,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Returns the array that is to be sorted by the sorting algorithm.
      *
      * @return  The array.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int[] getArray() {
         return array;
@@ -84,7 +84,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Sets the array that is to be sorted by the sorting algorithm.
      *
      * @param array The array to be sorted.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void setArray(int[] array) {
         this.array = Arrays.copyOf(array, array.length);
@@ -96,7 +96,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Returns the total number of comparisons performed by the sorting algorithm. Only call after method run.
      *
      * @return  The total number of comparisons.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getTotalComparisons() {
         return totalComparisons;
@@ -106,7 +106,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Returns the total number of swaps performed by the sorting algorithm. Only call after method run.
      *
      * @return  The total number of swaps.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getTotalSwaps() {
         return totalSwaps;
@@ -116,7 +116,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Returns a sorting summary of the sorting algorithm.
      *
      * @return  The sorting summary.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public SortingSummary getSummary() {
         return new SortingSummary(this);
@@ -126,7 +126,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Returns a copy of the current state of the array.
      *
      * @return  The copy.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int[] getArrayCopy() {
         int[] copy = new int[this.array.length];
@@ -138,7 +138,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Returns a string representation of the array.
      *
      * @return  The string representation of the array.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public String arrayToString() {
         return Arrays.toString(array);
@@ -147,7 +147,7 @@ public abstract class SortingAlgorithm extends Algorithm {
     /**
      * Prints the contained array on the console.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void printArray() {
         System.out.println(arrayToString());
@@ -160,7 +160,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      *
      * @param array The array.
      * @return  The unsortedness.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static double getUnsortednessOfArray(int[] array) {
         int n = array.length;
@@ -177,7 +177,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Runs the algorithm. Running the algorithm sorts the array from the smallest to the biggest value. This method is
      * simply to check whether the implementation of the algorithm works.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public abstract void sort();
 
@@ -185,7 +185,7 @@ public abstract class SortingAlgorithm extends Algorithm {
      * Resets the algorithm. The reset is done by resetting the attributes of the algorithm. Further, the state machine
      * is cleared.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void reset() {
         totalComparisons = 0;

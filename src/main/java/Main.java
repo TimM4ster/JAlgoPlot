@@ -20,7 +20,7 @@
  * Main class with main method. Entry point to application.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
+ * @version {@value Launcher#VERSION}
  * @since 1.0.0
  */
 public class Main {
