@@ -3,6 +3,9 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
+sourceCompatibility = 1.17
+targetCompatibility = 1.17
+
 version file("version").readLines().first()
 
 repositories {
