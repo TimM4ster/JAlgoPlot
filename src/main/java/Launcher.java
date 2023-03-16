@@ -32,24 +32,29 @@ import java.util.Objects;
  * replaced by a more flexible and dynamic layout.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class Launcher extends Application {
 
+    /**
+     * The current version of the application.
+     * 
+     * @since v0.1.0
+     */
     public static final String VERSION = getVersionNumberFromVersionFile();
 
     /**
      * The width of the launcher.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static final int WIDTH = 500;
 
     /**
      * The height of the launcher.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static final int HEIGHT = 450;
 
@@ -57,7 +62,7 @@ public class Launcher extends Application {
      * Main entry point to the application.
      *
      * @param args  The command line arguments.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static void main(String[] args) {
         launch(args);
@@ -67,7 +72,7 @@ public class Launcher extends Application {
      * Starts the application.
      *
      * @param stage The stage to be shown.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     @Override
     public void start(Stage stage) throws IOException {
@@ -88,6 +93,13 @@ public class Launcher extends Application {
         stage.show();  // Show the stage.
     }
 
+    /**
+     * Reads the version number from the version file. If the version file does not exist, the version number will be
+     * "unknown".
+     *
+     * @return  The version number.
+     * @since v0.1.0
+     */
     private static String getVersionNumberFromVersionFile() {
         // read version number from version file
         File versionFile = new File("version");
