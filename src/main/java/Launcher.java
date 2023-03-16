@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -35,6 +36,8 @@ import java.util.Objects;
  * @since v1.0.0
  */
 public class Launcher extends Application {
+
+    public static final String VERSION = getVersionNumberFromVersionFile();
 
     /**
      * The width of the launcher.
@@ -83,5 +86,18 @@ public class Launcher extends Application {
         stage.setResizable(false);  // Disable resizing of the stage.
 
         stage.show();  // Show the stage.
+    }
+
+    private static String getVersionNumberFromVersionFile() {
+        // read version number from version file
+        File versionFile = new File("version");
+        if (versionFile.exists()) {
+            try {
+                return new String(java.nio.file.Files.readAllBytes(versionFile.toPath()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "unknown";
     }
 }
