@@ -25,29 +25,29 @@ import algorithms.summary.AlgoSummary;
  * algorithm.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public abstract class Algorithm {
 
     /**
      * The state machine of this algorithm. Can be used to plot the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final StateMachine stateMachine = new StateMachine();
 
     /**
      * The total time elapsed from the start of the algorithm until completion.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected double totalTime;
 
     /**
      * The total number of iterations in the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected int totalIterations = 0;
 
@@ -55,7 +55,7 @@ public abstract class Algorithm {
      * Returns the name of this algorithm.
      *
      * @return  The name.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public abstract String getName();
 
@@ -63,7 +63,7 @@ public abstract class Algorithm {
      * Returns the type of this algorithm (example: sorting). The type is stored as a string.
      *
      * @return  The type.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public abstract String getType();
 
@@ -72,7 +72,7 @@ public abstract class Algorithm {
      * the algorithm.
      *
      * @return  The summary of this algorithm.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public abstract AlgoSummary getSummary();
 
@@ -80,7 +80,7 @@ public abstract class Algorithm {
      * Returns the state machine of the algorithm. Should only be used if the run method was called.
      *
      * @return  The state machine.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public StateMachine getStateMachine() {
         run();
@@ -91,7 +91,7 @@ public abstract class Algorithm {
      * Returns the total time elapsed from the beginning of the algorithm until completion. Only call after method run.
      *
      * @return  The total time elapsed.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public double getTotalTime() {
         return totalTime;
@@ -101,7 +101,7 @@ public abstract class Algorithm {
      * Returns the total number of iterations the algorithm needed until completion. Only call after method run.
      *
      * @return  The total number of iterations.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getTotalIterations() {
         return totalIterations;
@@ -110,7 +110,7 @@ public abstract class Algorithm {
     /**
      * Runs the algorithm and builds the state machine.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected abstract void run();
 }

@@ -23,43 +23,43 @@ package algorithms;
  * information about the execution of the algorithm. Further information is to be defined in subclasses.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public abstract class State {
 
     /**
      * The state following this state.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public State next;
 
     /**
      * The state prior to this state.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public State previous;
 
     /**
      * The id (typically the number) of this state.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final int id;
 
     /**
      * Time elapsed from start of algorithm until this state.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final double time;
 
     /**
      * The iteration of the algorithm in this state.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final int iteration;
 
@@ -70,7 +70,7 @@ public abstract class State {
      * @param id    The id (typically the number) of this state.
      * @param time  The time elapsed.
      * @param iteration The iteration.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected State(int id, double time, int iteration) {
         this.id = id;
@@ -82,7 +82,7 @@ public abstract class State {
      * Returns the id (typically the number) of this state.
      *
      * @return  The id.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getId() {
         return id;
@@ -92,7 +92,7 @@ public abstract class State {
      * Returns the total time elapsed from the start of the algorithm until this state.
      *
      * @return  The time elapsed.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public double getTime() {
         return time;
@@ -102,7 +102,7 @@ public abstract class State {
      * Returns the current iteration of the algorithm in this state.
      *
      * @return  The iteration.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getIteration() {
         return iteration;
@@ -112,7 +112,7 @@ public abstract class State {
      * Creates and returns a string-representation of this state.
      *
      * @return  The string-representation.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public abstract String toString();
 }

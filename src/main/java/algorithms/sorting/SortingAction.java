@@ -21,29 +21,29 @@ package algorithms.sorting;
  * Each element of this enumeration represents an action taken by a sorting algorithm in order to sort an array.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public enum SortingAction {
 
     /**
      * The action of highlighting an element inside the array. Might be removed in the future.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     HIGHLIGHT,
 
     /**
      * The action of comparing two elements inside the array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     COMPARE,
 
     /**
      * The action of swapping two elements inside the array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     SWAP
 }

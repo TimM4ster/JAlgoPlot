@@ -25,14 +25,14 @@ import javafx.scene.paint.Color;
  *
  * @author Tim-Michael Krieg
  * @version v1.1.0
- * @since v1.0.0
+ * @since v0.1.0
  */
 public class ArrayUtils {
 
     /**
      * The default color of the array elements. Might change in the future or will be replaced by a color picker.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static final Color DEFAULT_COLOR = Color.rgb(0, 0, 0, 0.5);
 
@@ -40,7 +40,7 @@ public class ArrayUtils {
      * The color of the array elements that are currently being compared or swapped. Might change in the future or will
      * be replaced by a color picker.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static final Color SELECTED_COLOR = Color.rgb(255, 0, 0, 0.5);
 
@@ -48,7 +48,7 @@ public class ArrayUtils {
      * Shuffles the given array. The array is shuffled by swapping each element with a random element in the array.
      *
      * @param array The array to shuffle.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static void shuffleArray(int[] array) {
         int index;
@@ -66,7 +66,7 @@ public class ArrayUtils {
      * the array.
      *
      * @param array The array to reverse.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static void reverseArray(int[] array) {
         int temp;

@@ -26,8 +26,8 @@ import java.util.Iterator;
  * implements the Iterable interface to allow for iteration over the steps of the algorithm using an iterator.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class StateMachine implements Iterable<State> {
 
@@ -39,21 +39,21 @@ public class StateMachine implements Iterable<State> {
     /**
      * The first and initial state of the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public State first;
 
     /**
      * The last state of the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public State last;
 
     /**
      * The total number of states the algorithm has.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int numberOfStates = 0;
 
@@ -62,7 +62,7 @@ public class StateMachine implements Iterable<State> {
      * the state is appended to the list of states.
      *
      * @param state  The state to be appended.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void append(State state) {
         if (first == null) {
@@ -79,7 +79,7 @@ public class StateMachine implements Iterable<State> {
     /**
      * Prints each state of this state machine to the console by calling the overwritten toString method.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void print() {
         for (State state = first; state != null; state = state.next) {
@@ -91,7 +91,7 @@ public class StateMachine implements Iterable<State> {
      * Returns an iterator over elements of type {@code State}.
      *
      * @return an Iterator.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     @Override
     public Iterator<State> iterator() {
@@ -118,7 +118,7 @@ public class StateMachine implements Iterable<State> {
     /**
      * Clears the state machine by setting the first and last state to null and the number of states to 0.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void clear() {
         first = last = null;
