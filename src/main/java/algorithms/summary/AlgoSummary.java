@@ -26,36 +26,36 @@ import algorithms.Algorithm;
  * versions of JAlgoPlot.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public abstract class AlgoSummary {
 
     /**
      * The name of the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final String name;
 
     /**
      * The type of the algorithm (example: sorting).
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final String type;
 
     /**
      * The total time elapsed during the execution of the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final double totalTime;
 
     /**
      * The total number of iterations the algorithm took for completion.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     protected final int totalIterations;
 
@@ -64,7 +64,7 @@ public abstract class AlgoSummary {
      * algorithm and the number of iterations the algorithm had to go through from the given algorithm object.
      *
      * @param algorithm The algorithm to extract the information from.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public AlgoSummary(Algorithm algorithm) {
         this.name = algorithm.getName();
@@ -77,7 +77,7 @@ public abstract class AlgoSummary {
      * Returns the name of the algorithm.
      *
      * @return  The name.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public String getName() {
         return name;
@@ -87,7 +87,7 @@ public abstract class AlgoSummary {
      * Returns the type of the algorithm.
      *
      * @return  The type.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public String getType() {
         return type;
@@ -97,7 +97,7 @@ public abstract class AlgoSummary {
      * Returns the total time elapsed since the start of the algorithm.
      *
      * @return  The total time elapsed.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public double getTotalTime() {
         return totalTime;
@@ -107,7 +107,7 @@ public abstract class AlgoSummary {
      * Returns the total amount of iterations the algorithm went through.
      *
      * @return  The total amount of iterations.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getTotalIterations() {
         return totalIterations;
@@ -116,7 +116,7 @@ public abstract class AlgoSummary {
     /**
      * Prints this summary to the console.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void print() {
         System.out.println(toString());
@@ -126,7 +126,7 @@ public abstract class AlgoSummary {
      * Creates and returns a string-representation of this Summary.
      *
      * @return  The string-representation.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public abstract String toString();
 }

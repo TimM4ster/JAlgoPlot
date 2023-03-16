@@ -41,22 +41,22 @@ import static gui.scenes.ArrayUtils.*;
  * animation.
  *
  * @author TimK
- * @version v1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class ArrayPane extends Pane {
 
     /**
      * The scene that contains this pane.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final SortingScene scene;
 
     /**
      * The length of the array that is displayed.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private int array_length;
 
@@ -64,35 +64,35 @@ public class ArrayPane extends Pane {
      * The array that is displayed. Each element of the array is represented by a rectangle. The height of the rectangle
      * represents the value of the element.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private int[] array;
 
     /**
      * The rectangles that are displayed. The height of the rectangles represent the values in the array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private Rectangle[] rectangles;
 
     /**
      * Represents whether the rectangles are currently flipped.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private boolean flipped = false;
 
     /**
      * The padding of the pane. Each side of the pane has the same padding.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final double padding = 10.0;
 
     /**
      * The algorithm that is executed on the array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private SortingAlgorithm algorithm;
 
@@ -100,7 +100,7 @@ public class ArrayPane extends Pane {
      * The transition that is currently playing. The object is global so that it can be stopped, paused or continued.
      * The transition is composed of multiple transitions. Each transition represents a state of the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private SequentialTransition sequentialTransition;
 
@@ -111,7 +111,7 @@ public class ArrayPane extends Pane {
      *
      * @param scene The scene that contains this pane.
      * @param width The width of the pane.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public ArrayPane(SortingScene scene, double width) {
         this.scene = scene;
@@ -133,7 +133,7 @@ public class ArrayPane extends Pane {
      * Returns the length of the array that is displayed.
      *
      * @return The length of the array.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public int getArrayLength() {
         return array_length;
@@ -144,7 +144,7 @@ public class ArrayPane extends Pane {
      * displayed.
      *
      * @param array_length The length of the array.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void initArrays(int array_length) {
         this.array_length = array_length;
@@ -158,7 +158,7 @@ public class ArrayPane extends Pane {
     /**
      * Initializes the array. The array is filled with values corresponding to the index of the value plus one.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void initArray() {
         for (int i = 0; i < array_length; i++) {
@@ -170,7 +170,7 @@ public class ArrayPane extends Pane {
      * Shuffles the array. The array is shuffled by swapping two random elements of the array. Afterwards, the
      * rectangles are redrawn.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void shuffleArray() {
         ArrayUtils.shuffleArray(array);
@@ -181,7 +181,7 @@ public class ArrayPane extends Pane {
      * Reverses the array. The array is reversed by swapping the first and last element, the second and second last
      * element and so on. Afterwards, the rectangles are redrawn.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void reverseArray() {
         ArrayUtils.reverseArray(array);
@@ -191,7 +191,7 @@ public class ArrayPane extends Pane {
     /**
      * Initializes the rectangles. The rectangles are added to the pane. The rectangles are then displayed.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void initRectangles() {
         getChildren().clear();
@@ -208,7 +208,7 @@ public class ArrayPane extends Pane {
     /**
      * Repaints the rectangles. The rectangles are resized and moved to the correct position.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void repaintRectangles() {
         for (int i = 0; i < array_length; i++) {
@@ -242,7 +242,7 @@ public class ArrayPane extends Pane {
      * @param index The index of the rectangle.
      * @param width The width of the rectangle.
      * @return The x-coordinate of the rectangle.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private double getRectangleX(int index, double width) {
         return padding + index * (width + 2);
@@ -252,7 +252,7 @@ public class ArrayPane extends Pane {
      * Highlights the specified rectangle. The rectangle is highlighted by changing its color.
      *
      * @param indices   The indices of the rectangles that are highlighted.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void highlightRectangles(int... indices) {
         for (int index : indices) {
@@ -264,7 +264,7 @@ public class ArrayPane extends Pane {
      * Highlight the specified rectangles. The rectangles are highlighted by changing its color.
      *
      * @param indices   The pair indices of the rectangles that are highlighted.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void highlightRectangles(Pair<Integer, Integer> indices) {
         highlightRectangles(indices.first, indices.second);
@@ -273,7 +273,7 @@ public class ArrayPane extends Pane {
     /**
      * Resets the color of all the rectangles. The color of the rectangles is reset to the default color.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void resetRectangleColors() {
         for (Rectangle rectangle : rectangles) {
@@ -285,7 +285,7 @@ public class ArrayPane extends Pane {
      * Resets the color of the specified rectangles. The color of the rectangles is reset to the default color.
      *
      * @param indices  The indices of the rectangles that are reset.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void resetRectangleColors(int... indices) {
         for (int index : indices) {
@@ -297,7 +297,7 @@ public class ArrayPane extends Pane {
      * Resets the color of the specified rectangles. The color of the rectangles is reset to the default color.
      *
      * @param indices  The pair indices of the rectangles that are reset.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void resetRectangleColors(Pair<Integer, Integer> indices) {
         resetRectangleColors(indices.first, indices.second);
@@ -310,7 +310,7 @@ public class ArrayPane extends Pane {
      * @param index1    The index of the first rectangle.
      * @param index2    The index of the second rectangle.
      * @return The transition that swaps the rectangles.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private ParallelTransition getSwappingTransition(int index1, int index2) {
         //double translation = rectangles[index2].getX() - rectangles[index1].getX();
@@ -346,7 +346,7 @@ public class ArrayPane extends Pane {
      *
      * @param indices   The pair indices of the rectangles that are swapped.
      * @return The transition that swaps the rectangles.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private ParallelTransition getSwappingTransition(Pair<Integer, Integer> indices) {
         return getSwappingTransition(indices.first, indices.second);
@@ -359,7 +359,7 @@ public class ArrayPane extends Pane {
      * @param index1    The index of the first rectangle.
      * @param index2    The index of the second rectangle.
      * @return The transition that highlights the rectangles.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private ParallelTransition getComparisonTransition(int index1, int index2) {
         FillTransition ft1 = new FillTransition(Duration.millis(500), rectangles[index1], DEFAULT_COLOR, SELECTED_COLOR);
@@ -382,7 +382,7 @@ public class ArrayPane extends Pane {
      *
      * @param indices   The pair indices of the rectangles that are highlighted.
      * @return The transition that highlights the rectangles.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private ParallelTransition getComparisonTransition(Pair<Integer, Integer> indices) {
         return getComparisonTransition(indices.first, indices.second);
@@ -394,7 +394,7 @@ public class ArrayPane extends Pane {
      *
      * @param index1    The index of the first rectangle.
      * @param index2    The index of the second rectangle.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void swapRectangles(int index1, int index2) {
         getSwappingTransition(index1, index2).play();
@@ -405,7 +405,7 @@ public class ArrayPane extends Pane {
      * correct position.
      *
      * @param indices   The pair indices of the rectangles that are swapped.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void swapRectangles(Pair<Integer, Integer> indices) {
         swapRectangles(indices.first, indices.second);
@@ -433,7 +433,7 @@ public class ArrayPane extends Pane {
      * Returns the algorithm that is currently being used.
      *
      * @return  The algorithm that is currently being used.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public SortingAlgorithm getAlgorithm() {
         return algorithm;
@@ -443,7 +443,7 @@ public class ArrayPane extends Pane {
      * Sets the algorithm that is used to sort the array.
      *
      * @param algorithmName The name of the algorithm.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void setAlgorithm(String algorithmName) {
         this.algorithm = switch (algorithmName) {
@@ -456,7 +456,7 @@ public class ArrayPane extends Pane {
     /**
      * Updates the algorithm with the current array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void updateAlgorithm() {
         algorithm.setArray(array);
@@ -466,7 +466,7 @@ public class ArrayPane extends Pane {
      * Starts the display of the sorting algorithm. The sorting algorithm is applied to the current state of the array.
      * Each swapping and comparison is displayed by a transition. All transitions are played in sequence.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void startAlgorithm() {
         updateAlgorithm();
@@ -508,7 +508,7 @@ public class ArrayPane extends Pane {
      * Stops the current algorithm and resets the colors of the rectangles. Further, if rectangles are not at the correct
      * position, they are moved to the correct position.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void stopAlgorithm() {
         if (sequentialTransition != null) {
@@ -521,7 +521,7 @@ public class ArrayPane extends Pane {
     /**
      * Pauses the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void pauseAlgorithm() {
         if (sequentialTransition != null) {
@@ -532,7 +532,7 @@ public class ArrayPane extends Pane {
     /**
      * Resumes the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void resumeAlgorithm() {
         if (sequentialTransition != null) {

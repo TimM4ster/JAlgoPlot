@@ -36,8 +36,8 @@ import java.util.Objects;
  * Further, action events triggered by the buttons of the sorting scene are processed here.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class SortingScene {
 
@@ -50,7 +50,7 @@ public class SortingScene {
      * regularly to ensure that the combo box always contains the latest algorithms. In future versions, the list will
      * be replaced by a file containing the algorithms.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final String[] ALGORITHMS = {
             "Bubble Sort",
@@ -65,21 +65,21 @@ public class SortingScene {
     /**
      * The stage object that the scene is added to. Can be used to extract information about the size of the stage.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final Stage STAGE;
 
     /**
      * The scene that this class creates.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private final Scene SCENE;
 
     /**
      * The pane that contains the array which is displayed by the scene and on which the algorithm is executed.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private ArrayPane array_pane;
 
@@ -87,56 +87,56 @@ public class SortingScene {
     /**
      * The menu bar at the top of the scene.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private MenuBar menu_bar;
 
     /**
      * The combo box from which the algorithm can be chosen.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private ComboBox<String> combo_box;
 
     /**
      * The text field from which the array length is read.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private TextField text_field;
 
     /**
      * The button that starts the display of the algorithm.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private Button run_algo_button;
 
     /**
      * Button that initializes the array with the length set in the text field.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private Button init_array_button;
 
     /**
      * Button that shuffles the array displayed. Only active after array was initialized.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private Button shuffle_array_button;
 
     /**
      * Button that reverses the array displayed. Only active after array was initialized.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private Button rev_array_button;
 
     /**
      * Button that flips the alignment of the rectangles displayed in the scene. Only active after array was initialized.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private Button flip_align_button;
 
@@ -146,7 +146,7 @@ public class SortingScene {
      * versions, the scene will extend the Scene class from JavaFx.
      *
      * @param stage The stage this scene is set in.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public SortingScene(Stage stage) {
         stage.setTitle("Sorting Pane");  // Set title of the stage
@@ -167,7 +167,7 @@ public class SortingScene {
      * Returns the scene that is initialized in the constructor of this class. Will be removed in the future.
      *
      * @return  The stage.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public Scene getScene() {
         return SCENE;  // Return the scene
@@ -177,7 +177,7 @@ public class SortingScene {
      * Creates the main pane of the scene that all components are added to and returns it after creation.
      *
      * @return  The main pane of the scene.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private BorderPane createMainPane() {
         BorderPane main_pane = new BorderPane();  // Create a new BorderPane to add all components to
@@ -197,7 +197,7 @@ public class SortingScene {
      *    <li>Home
      * </ul>
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void createMenuBar() {
         menu_bar = new MenuBar();  // Create a new menu bar
@@ -218,7 +218,7 @@ public class SortingScene {
      * </ul>
      *
      * @return  The "Home" menu.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private Menu createHomeMenu() {
         Menu home_menu = new Menu("Home");  // Create the "Home" menu
@@ -255,7 +255,7 @@ public class SortingScene {
      * Creates the upper portion of the scene. That is, it creates a horizontal box containing setting functionalities.
      *
      * @return  The HBox.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private HBox createSettingsBox() {
         createRunButton();  // Create the run button
@@ -294,7 +294,7 @@ public class SortingScene {
      * Creates the combo box that is used to select the algorithm for display. All available algorithms are stored in
      * the ALGORITHMS attribute. It is disabled by default until an array is initialized.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void createComboBox() {
         combo_box = new ComboBox<>(FXCollections.observableArrayList(ALGORITHMS));
@@ -335,7 +335,7 @@ public class SortingScene {
     /**
      * Disables or enables all buttons except the run button.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void disableButtons(boolean disable) {
         shuffle_array_button.setDisable(disable);
@@ -348,7 +348,7 @@ public class SortingScene {
     /**
      * Creates the text field that is used to set the length of the displayed array. Only allows numerical values.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void createArrayLengthReader() {
         text_field = new TextField();
@@ -367,7 +367,7 @@ public class SortingScene {
     /**
      * Creates the button that initializes the array with the length entered to the text field.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void createInitializeArrayButton() {
         init_array_button = new Button("Initialize");
@@ -390,7 +390,7 @@ public class SortingScene {
     /**
      * Creates the button that shuffles the displayed array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void createShuffleButton() {
         shuffle_array_button = new Button("Shuffle");
@@ -403,7 +403,7 @@ public class SortingScene {
     /**
      * Creates the button that reverses the displayed array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void createReverseButton() {
         rev_array_button = new Button("Reverse");
@@ -416,7 +416,7 @@ public class SortingScene {
     /**
      * Creates the button that flips the alignment of the displayed array.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     private void createFlipButton() {
         flip_align_button = new Button("Flip");
@@ -429,7 +429,7 @@ public class SortingScene {
     /**
      * Called after the algorithm finished or was stopped. Enables all buttons and sets the run button text to "Run".
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void resetAlgo() {
         run_algo_button.setText("Run");

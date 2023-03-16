@@ -31,8 +31,8 @@ import java.time.format.DateTimeFormatter;
  * This class contains all constants and reusable methods used in the graphical representations of the algorithms.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class GUI_Utils {
 
@@ -42,7 +42,7 @@ public class GUI_Utils {
      * project.
      *
      * @param scene The scene to take a screenshot of.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static void takeScreenshot(Scene scene) {
         WritableImage image = scene.snapshot(null);

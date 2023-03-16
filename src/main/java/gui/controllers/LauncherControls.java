@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  * the scene accordingly. Action events triggered by the buttons of the launcher are processed here.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
+ * @version {@value Launcher#VERSION}
  * @since v0.1.0
  */
 public class LauncherControls {
@@ -37,7 +37,7 @@ public class LauncherControls {
      * Switches the scene of the stage to the scene displaying sorting algorithms.
      *
      * @param e The action event triggering the switch.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void switchToSortingScene(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -50,7 +50,7 @@ public class LauncherControls {
      * Exits the application. This method is assigned to the "Quit"-button in the launcher.
      *
      * @param e The action event evoking the exit.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public void exitApplication(ActionEvent e) {
         Platform.exit();

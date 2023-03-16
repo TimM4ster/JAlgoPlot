@@ -20,8 +20,8 @@
  * Main class with main method. Entry point to application.
  *
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since 1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class Main {
     public static void main(String[] args) {

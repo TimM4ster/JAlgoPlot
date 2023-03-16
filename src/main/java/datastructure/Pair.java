@@ -23,22 +23,22 @@ package datastructure;
  * @param <F>   The type of the first element in the pair.
  * @param <S>   The type of the second element in the pair.
  * @author Tim-Michael Krieg
- * @version 1.0.0
- * @since v1.0.0
+ * @version {@value Launcher#VERSION}
+ * @since v0.1.0
  */
 public class Pair<F, S> {
 
     /**
      * The first element of this pair.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public F first;
 
     /**
      * The second element of this pair.
      *
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public S second;
 
@@ -48,7 +48,7 @@ public class Pair<F, S> {
      *
      * @param first The first element of this pair.
      * @param second    The second element of this pair.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public Pair(F first, S second) {
         this.first = first;
@@ -63,7 +63,7 @@ public class Pair<F, S> {
      * @return  The pair-object containing the two elements.
      * @param <F>   The type of the first element.
      * @param <S>   The type of the second element.
-     * @since v1.0.0
+     * @since v0.1.0
      */
     public static <F, S> Pair<F, S> of(F first, S second) {
         return new Pair<>(first, second);
