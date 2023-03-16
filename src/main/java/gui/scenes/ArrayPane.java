@@ -249,28 +249,6 @@ public class ArrayPane extends Pane {
     }
 
     /**
-     * Highlights the specified rectangle. The rectangle is highlighted by changing its color.
-     *
-     * @param indices   The indices of the rectangles that are highlighted.
-     * @since v0.1.0
-     */
-    private void highlightRectangles(int... indices) {
-        for (int index : indices) {
-            rectangles[index].setFill(SELECTED_COLOR);
-        }
-    }
-
-    /**
-     * Highlight the specified rectangles. The rectangles are highlighted by changing its color.
-     *
-     * @param indices   The pair indices of the rectangles that are highlighted.
-     * @since v0.1.0
-     */
-    private void highlightRectangles(Pair<Integer, Integer> indices) {
-        highlightRectangles(indices.first, indices.second);
-    }
-
-    /**
      * Resets the color of all the rectangles. The color of the rectangles is reset to the default color.
      *
      * @since v0.1.0
@@ -291,16 +269,6 @@ public class ArrayPane extends Pane {
         for (int index : indices) {
             rectangles[index].setFill(DEFAULT_COLOR);
         }
-    }
-
-    /**
-     * Resets the color of the specified rectangles. The color of the rectangles is reset to the default color.
-     *
-     * @param indices  The pair indices of the rectangles that are reset.
-     * @since v0.1.0
-     */
-    private void resetRectangleColors(Pair<Integer, Integer> indices) {
-        resetRectangleColors(indices.first, indices.second);
     }
 
     /**
@@ -389,29 +357,6 @@ public class ArrayPane extends Pane {
     }
 
     /**
-     * Plays a swapping transition that swaps the specified rectangles. The rectangles are swapped by moving them to the
-     * correct position.
-     *
-     * @param index1    The index of the first rectangle.
-     * @param index2    The index of the second rectangle.
-     * @since v0.1.0
-     */
-    private void swapRectangles(int index1, int index2) {
-        getSwappingTransition(index1, index2).play();
-    }
-
-    /**
-     * Plays a swapping transition that swaps the specified rectangles. The rectangles are swapped by moving them to the
-     * correct position.
-     *
-     * @param indices   The pair indices of the rectangles that are swapped.
-     * @since v0.1.0
-     */
-    private void swapRectangles(Pair<Integer, Integer> indices) {
-        swapRectangles(indices.first, indices.second);
-    }
-
-    /**
      * TODO: Fix this method.
      */
     public void flipRectangles() {
@@ -486,6 +431,7 @@ public class ArrayPane extends Pane {
                 case COMPARE -> {
                     transitions.add(getComparisonTransition(state.getIndices()));
                 }
+                default -> throw new IllegalArgumentException("Unexpected value: " + state.getAction());
             }
         }
 
